@@ -1,1 +1,0 @@
-import mockjs from 'mockjs';
