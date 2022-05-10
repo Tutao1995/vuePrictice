@@ -15,6 +15,9 @@ html {
     margin: 0;
 }
 #app {
+    position: relative;
+    height: 100%;
+    width: 100%;
     text-align: center;
     color: #2c3e50;
 }

@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios'
 
-axios.defaults.baseURL = './api'
+axios.defaults.baseURL = ''
 axios.defaults.timeout = 10000
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 axios.interceptors.request.use(

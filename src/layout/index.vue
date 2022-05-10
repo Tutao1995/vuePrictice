@@ -1,0 +1,78 @@
+<template>
+    <div class="home-wrapper">
+        <div class="home-header">
+            <header>头</header>
+        </div>
+        <div class="home-content">
+            <the-nav
+                class="home-content-nav"
+                :nav="navList"
+                @open="handleOpen"
+                @close="handleClose"
+            />
+            <router-view v-slot="{ Component }">
+                <keep-alive>
+                    <component :is="Component" class="home-content-box" />
+                </keep-alive>
+            </router-view>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+import { reactive } from 'vue'
+import theNav from './components/nav.vue'
+
+const navList = reactive([
+    {
+        label: 'table',
+        index: '/home/table',
+    },
+    {
+        label: 'button',
+        index: '/home/button',
+    },
+    {
+        label: 'echarts',
+        index: '/home/echarts',
+    },
+])
+const handleOpen = (key: string, keyPath: string[]) => {
+    console.log(key, keyPath)
+}
+const handleClose = (key: string, keyPath: string[]) => {
+    console.log(key, keyPath)
+}
+</script>
+
+<style lang="scss" scoped>
+.home-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    .home-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        background: #eee;
+    }
+    .home-content {
+        flex: 1;
+        overflow: auto;
+        display: flex;
+        &-nav {
+            margin-right: 20px;
+            width: 200px;
+            height: 100%;
+        }
+        &-box {
+            position: relative;
+            height: 100%;
+            width: calc(100% - 220px);
+        }
+    }
+}
+</style>
