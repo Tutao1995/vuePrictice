@@ -10,11 +10,13 @@
                 @open="handleOpen"
                 @close="handleClose"
             />
-            <router-view v-slot="{ Component }">
-                <keep-alive>
-                    <component :is="Component" class="home-content-box" />
-                </keep-alive>
-            </router-view>
+            <div class="home-content-box">
+                <router-view v-slot="{ Component }">
+                    <keep-alive>
+                        <component :is="Component" />
+                    </keep-alive>
+                </router-view>
+            </div>
         </div>
     </div>
 </template>
