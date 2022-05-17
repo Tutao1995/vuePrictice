@@ -2,24 +2,39 @@
     <div v-if="props.nav.length">
         <el-menu
             class="el-menu-vertical-demo"
-            default-active="/home/table"
+            :default-active="defaultRoute"
             @open="handleOpen"
             @close="handleClose"
             router
         >
-            <el-sub-menu index="/home">
-                <template #title>home</template>
-                <el-menu-item v-for="item of props.nav" :index="item.index" :key="item.index">{{
-                    item.label
-                }}</el-menu-item>
-            </el-sub-menu>
+            <template v-for="item of props.nav" :key="item.index">
+                <template v-if="item.children">
+                    <el-sub-menu :index="item.index">
+                        <template #title>{{ item.label }}</template>
+                        <template v-if="item.children">
+                            <el-menu-item
+                                v-for="cItem of item.children"
+                                :index="cItem.index"
+                                :key="cItem.index"
+                            >
+                                {{ cItem.label }}
+                            </el-menu-item>
+                        </template>
+                    </el-sub-menu>
+                </template>
+                <template v-else>
+                    <el-menu-item :index="item.index">{{ item.label }}</el-menu-item>
+                </template>
+            </template>
         </el-menu>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { defineProps, defineEmits, PropType, onMounted } from 'vue'
+import { defineProps, defineEmits, PropType, onMounted, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+
+const defaultRoute = ref<string>('/home/index')
 
 interface Nav {
     label: String
@@ -38,17 +53,16 @@ const props = defineProps({
 })
 
 onMounted(() => {
-    console.log(props.nav, 'props')
+    let router = useRouter()
+    defaultRoute.value = router.currentRoute.value.fullPath
 })
 
 const emits = defineEmits(['open', 'close'])
 
 const handleOpen = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
     emits('open', key, keyPath)
 }
 const handleClose = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
     emits('close', key, keyPath)
 }
 </script>

@@ -27,16 +27,26 @@ import theNav from './components/nav.vue'
 
 const navList = reactive([
     {
-        label: 'table',
-        index: '/home/table',
+        label: '首页',
+        index: '/home/index',
     },
     {
-        label: 'button',
-        index: '/home/button',
+        label: '组件',
+        index: '/components/button',
+        children: [
+            {
+                label: 'button',
+                index: '/components/button',
+            },
+            {
+                label: 'table',
+                index: '/components/table',
+            },
+        ],
     },
     {
         label: 'echarts',
-        index: '/home/echarts',
+        index: '/echarts/index',
     },
 ])
 const handleOpen = (key: string, keyPath: string[]) => {
