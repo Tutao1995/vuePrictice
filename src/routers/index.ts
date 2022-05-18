@@ -1,9 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import NProgress from "@/config/nprogress/index";
-// import home from './modules/home'
-// import components from './modules/components'
-// import echarts from './modules/echarts'
-
+import { useMainStore } from '@/stores/index'
 
 const metaRouters = import.meta.globEager("./modules/*.ts");
 export const routerArray: RouteRecordRaw[] = [];
@@ -35,7 +32,17 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     NProgress.start();
-    next()
+    const isLogin = useMainStore().isLogin;
+    if (to.name === 'login') {
+        next()
+    } else {
+        if (!isLogin) {
+            next('/')
+            return
+        }
+        next()
+    }
+
 });
 
 router.afterEach(() => {

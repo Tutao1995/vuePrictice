@@ -3,14 +3,14 @@ import { defineStore } from 'pinia'
 export const useMainStore = defineStore({
     id: 'main',
     state: () => ({
-        name: '超级管理员',
+        isLogin: false
     }),
     getters: {
-        nameLength: (state) => state.name.length,
+        nameLength: (state) => state,
     },
     actions: {
-        async insertPost() {
-            this.name = Math.round(100 * Math.random()) + ''
+        async changeState(value: boolean) {
+            this.isLogin = value
         },
     },
 })
