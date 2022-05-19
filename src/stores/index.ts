@@ -1,15 +1,25 @@
 import { defineStore } from 'pinia'
+import { authorityType } from '@/assets/authority'
+
+
+interface stateInterface {
+    isLogin: boolean,
+    authority: authorityType
+}
+
+type stateType = () => stateInterface
+
 
 export const useMainStore = defineStore({
     id: 'main',
-    state: () => ({
-        isLogin: false
-    }),
-    getters: {
-        nameLength: (state) => state,
+    state: function (): stateInterface {
+        return {
+            isLogin: false,
+            authority: 'common'
+        }
     },
     actions: {
-        async changeState(value: boolean) {
+        async changeLoginState(value: boolean) {
             this.isLogin = value
         },
     },

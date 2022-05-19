@@ -28,125 +28,25 @@
 </template>
 
 <script setup lang="ts">
+import { option1, option2, option3 } from '@/assets/particles'
 import { ref } from 'vue'
 import { ElNotification } from 'element-plus'
 import { useMainStore } from '@/stores/index'
 import { useRouter } from 'vue-router'
+import { authorityType } from '@/assets/authority'
+
 const mainStore = useMainStore()
-const updateLoginState = () => {
+const updateLoginState = (value: authorityType) => {
     mainStore.$patch({
         isLogin: true,
+        authority: value,
     })
 }
 const router = useRouter()
 
 const username = ref<string>('')
 const password = ref<string>('')
-const options = {
-    particles: {
-        number: {
-            value: 50,
-            density: {
-                enable: true,
-                valueArea: 400,
-            },
-        },
-        color: {
-            value: '#3CB2BE',
-        },
-        shape: {
-            type: 'circle',
-            stroke: {
-                width: 0,
-                color: '#000000',
-            },
-            polygon: {
-                nbSides: 5,
-            },
-        },
-        opacity: {
-            value: 1,
-            random: false,
-            anim: {
-                enable: false,
-                speed: 1,
-                opacityMin: 0.1,
-                sync: false,
-            },
-        },
-        size: {
-            value: 5,
-            random: true,
-            anim: {
-                enable: false,
-                speed: 40,
-                sizeMin: 0.1,
-                sync: false,
-            },
-        },
-        lineLinked: {
-            enable: true,
-            distance: 160,
-            color: '#3CB2BE',
-            opacity: 0.5,
-            width: 1,
-        },
-        move: {
-            enable: true,
-            speed: 1,
-            direction: 'none',
-            random: true,
-            straight: false,
-            outMode: 'out',
-            bounce: false,
-            attract: {
-                enable: false,
-                rotateX: 600,
-                rotateY: 1200,
-            },
-        },
-    },
-    interactivity: {
-        detectsOn: 'canvas',
-        events: {
-            onHover: {
-                enable: true,
-                mode: 'bubble',
-            },
-            onClick: {
-                enable: false,
-                mode: 'push',
-            },
-            resize: true,
-        },
-        modes: {
-            grab: {
-                distance: 400,
-                lineLinked: {
-                    opacity: 1,
-                },
-            },
-            bubble: {
-                distance: 400,
-                size: 8,
-                duration: 10,
-                opacity: 0.248,
-                speed: 3,
-            },
-            repulse: {
-                distance: 200,
-                duration: 0.4,
-            },
-            push: {
-                particlesNb: 4,
-            },
-            remove: {
-                particlesNb: 2,
-            },
-        },
-    },
-    detectRetina: true,
-}
+const options = option3
 
 const login = () => {
     if (!username.value) {
@@ -163,8 +63,10 @@ const login = () => {
         })
         return
     }
-    updateLoginState()
-    router.push({ name: 'home' })
+    if (['admin', 'system', 'common'].includes(username.value)) {
+        updateLoginState(username.value as authorityType)
+        router.push({ name: 'home' })
+    }
 }
 </script>
 
@@ -193,25 +95,25 @@ const login = () => {
             font-size: 24px;
             font-weight: bold;
             color: #fff;
-            text-shadow: 0 0 5px #fff, 0 0 5px #eee, 0 0 5px #111;
+            animation: bounce ease 2s infinite;
         }
         &-item {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
-            &:deep .el-input__wrapper {
+            :deep(.el-input__wrapper) {
                 background: none;
                 border: 1px solid #3cb2be;
                 box-shadow: none;
             }
-            &:deep .el-input__inner {
+            :deep(.el-input__inner) {
                 color: #fff;
             }
         }
         &-button {
             .el-button {
                 width: 215px;
-                background: rgb(58 58 58 / 80%);
+                background: #1e80ff;
                 border: none;
                 transition: background ease 0.5s;
                 &:hover {
@@ -229,5 +131,78 @@ const login = () => {
     height: 100%;
     background: #000000;
     z-index: -10;
+}
+
+@keyframes bounce {
+    0% {
+        opacity: 0;
+        text-shadow: none;
+        transform: translateX(-10px);
+    }
+    10% {
+        opacity: 0;
+        text-shadow: none;
+        transform: translateX(0px);
+    }
+    15% {
+        opacity: 0;
+        text-shadow: none;
+        transform: translateX(10px);
+    }
+    20% {
+        opacity: 0;
+        text-shadow: none;
+        transform: translateX(0px);
+    }
+    25% {
+        text-shadow: 0 0 5px #999;
+        transform: translateX(0);
+    }
+    35% {
+        text-shadow: 0 0 5px #999;
+        transform: translateX(-10px);
+    }
+    45% {
+        text-shadow: 0 0 5px #999;
+        transform: translateX(0);
+    }
+
+    50% {
+        text-shadow: 0 0 5px #aaa;
+        transform: translateX(10px);
+    }
+    55% {
+        text-shadow: 0 0 5px #aaa;
+        transform: translateX(0px);
+    }
+    60% {
+        text-shadow: 0 0 5px #aaa;
+        transform: translateX(-10px);
+    }
+    65% {
+        text-shadow: 0 0 5px #aaa;
+        transform: translateX(0px);
+    }
+    70% {
+        text-shadow: 0 0 5px #aaa;
+        transform: translateX(10px);
+    }
+    75% {
+        text-shadow: 0 0 5px #ccc;
+        transform: translateX(0px);
+    }
+    85% {
+        text-shadow: 0 0 5px #ccc;
+        transform: translateX(-10px);
+    }
+    95% {
+        text-shadow: 0 0 5px #ccc;
+        transform: translateX(0px);
+    }
+    100% {
+        opacity: 1;
+        text-shadow: 0 0 5px #fff;
+        transform: translateX(10px);
+    }
 }
 </style>

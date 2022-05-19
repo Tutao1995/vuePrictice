@@ -23,32 +23,15 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
+import { useMainStore } from '@/stores/index'
+import authority from '@/assets/authority'
 import theNav from './components/nav.vue'
 
-const navList = reactive([
-    {
-        label: '首页',
-        index: '/home/index',
-    },
-    {
-        label: '组件',
-        index: '/components/button',
-        children: [
-            {
-                label: 'button',
-                index: '/components/button',
-            },
-            {
-                label: 'table',
-                index: '/components/table',
-            },
-        ],
-    },
-    {
-        label: 'echarts',
-        index: '/echarts/index',
-    },
-])
+const mainStore = useMainStore()
+const authorityStore = mainStore.authority
+const authorities = authority[authorityStore]
+
+const navList = reactive(authorities)
 const handleOpen = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }

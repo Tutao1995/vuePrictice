@@ -1,8 +1,11 @@
 <template>
     <div v-if="props.nav.length">
         <el-menu
-            class="el-menu-vertical-demo"
+            class="el-menu-vertical"
             :default-active="defaultRoute"
+            active-text-color="#ffd04b"
+            background-color="#545c64"
+            text-color="#fff"
             @open="handleOpen"
             @close="handleClose"
             router
@@ -67,4 +70,20 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.el-menu-vertical {
+    height: 100%;
+}
+.el-menu-item.is-active {
+    position: relative;
+    background: #86909c;
+    &::before {
+        position: absolute;
+        left: 0;
+        content: '';
+        width: 4px;
+        height: 100%;
+        background: #409eff;
+    }
+}
+</style>
