@@ -1,16 +1,35 @@
 # Vue 3 + TypeScript + Vite
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+# 开发遇见的问题
 
-## Recommended IDE Setup
+### 登录页使用 particles.vue3 无效
 
--   [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+降低 particles.vue3 版本以及下载 tsparticles
 
-## Type Support For `.vue` Imports in TS
+### particles.vue3 ts 报文件引入类型的错误
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+在 env.d.ts 中添加对应的声明
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+```javascript
+    declare module "particles.vue3";
+```
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+### 页面安装依赖经常 ts 报类型错误
+
+npm i @type/node
+
+### 页面刷新 store 内容没有了
+
+store 持续化：
+
+-   添加 pinia-plugin-persist 依赖
+-   在 store 中添加 persist 参数
+-   pinia.use(piniaPluginPreset);
+
+### 菜单页签刷新，页面变化但是页签 active 不对
+
+监听路由变化，默认 active 跟随路由
+
+### 嵌套路由无法访问
+
+在子路由 path 中开头不写‘/’
