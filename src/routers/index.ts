@@ -33,13 +33,23 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     NProgress.start();
     const isLogin = useMainStore().isLogin;
+    const title = to.meta.title
     if (to.name === 'login') {
+        useMainStore().$patch({
+            isLogin: false,
+            title: ''
+        })
         next()
     } else {
         if (!isLogin) {
+            useMainStore().$patch({
+                isLogin: false,
+                title: ''
+            })
             next('/')
             return
         }
+        useMainStore().changeTitleState(title as string)
         next()
     }
 

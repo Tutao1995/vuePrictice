@@ -11,6 +11,9 @@ const routes: RouteRecordRaw[] = [
                 name: 'echarts',
                 path: 'index',
                 component: () => import('@/pages/echarts/index.vue'),
+                meta: {
+                    title: 'echarts'
+                }
             },
         ]
     },

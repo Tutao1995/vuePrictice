@@ -113,11 +113,11 @@ const login = () => {
         &-button {
             .el-button {
                 width: 215px;
-                background: #1e80ff;
+                background: $red;
                 border: none;
                 transition: background ease 0.5s;
                 &:hover {
-                    background: rgb(120 120 120 / 80%);
+                    background: $lightRed;
                 }
             }
         }

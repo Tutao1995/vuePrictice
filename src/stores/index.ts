@@ -1,26 +1,39 @@
-import { defineStore } from 'pinia'
+import { defineStore, createPinia } from 'pinia'
 import { authorityType } from '@/assets/authority'
+import piniaPluginPreset from 'pinia-plugin-persist'
+import piniaPersistConfig from "@/config/piniaPluginPreset/index";
 
 
 interface stateInterface {
     isLogin: boolean,
-    authority: authorityType
+    authority: authorityType,
+    title: string,
+    expand: boolean
 }
-
-type stateType = () => stateInterface
-
-
 export const useMainStore = defineStore({
     id: 'main',
     state: function (): stateInterface {
         return {
             isLogin: false,
-            authority: 'common'
+            authority: 'common',
+            title: '',
+            expand: true
         }
     },
     actions: {
         async changeLoginState(value: boolean) {
             this.isLogin = value
         },
+        async changeTitleState(value: string) {
+            this.title = value
+        }
     },
+    // store 持续化  避免刷新内容清空
+    persist: piniaPersistConfig("main")
 })
+
+const pinia = createPinia();
+pinia.use(piniaPluginPreset);
+
+export default pinia;
+

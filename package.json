@@ -25,6 +25,7 @@
         "particles.vue3": "1.11.0",
         "path": "^0.12.7",
         "pinia": "^2.0.13",
+        "pinia-plugin-persist": "^1.0.0",
         "prettier": "^2.6.2",
         "sass": "^1.50.0",
         "sass-loader": "^12.6.0",

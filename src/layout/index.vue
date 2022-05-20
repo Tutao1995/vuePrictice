@@ -1,8 +1,6 @@
 <template>
     <div class="home-wrapper">
-        <div class="home-header">
-            <header>头</header>
-        </div>
+        <the-top />
         <div class="home-content">
             <the-nav
                 class="home-content-nav"
@@ -26,8 +24,13 @@ import { reactive } from 'vue'
 import { useMainStore } from '@/stores/index'
 import authority from '@/assets/authority'
 import theNav from './components/nav.vue'
+import theTop from './components/top.vue'
 
 const mainStore = useMainStore()
+
+// if (sessionStorage.getItem('store')) {
+//     mainStore.$state = JSON.parse(sessionStorage.getItem('store') as string)
+// }
 const authorityStore = mainStore.authority
 const authorities = authority[authorityStore]
 
@@ -38,6 +41,11 @@ const handleOpen = (key: string, keyPath: string[]) => {
 const handleClose = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }
+
+// window.addEventListener('beforeunload', () => {
+//     debugger
+//     sessionStorage.setItem('store', JSON.stringify(mainStore.$state))
+// })
 </script>
 
 <style lang="scss" scoped>

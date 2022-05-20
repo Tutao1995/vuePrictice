@@ -11,11 +11,17 @@ const routes: RouteRecordRaw[] = [
                 name: 'table',
                 path: 'table',
                 component: () => import('@/pages/components/table/index.vue'),
+                meta: {
+                    title: '组件/表格'
+                }
             },
             {
                 name: 'button',
                 path: 'button',
                 component: () => import('@/pages/components/button/index.vue'),
+                meta: {
+                    title: '组件/按钮'
+                }
             },
         ]
     },
