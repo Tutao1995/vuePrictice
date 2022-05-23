@@ -24,8 +24,8 @@
                                 :index="cItem.index"
                                 :key="cItem.index"
                             >
-                                <el-icon><component :is="cItem.icon" /></el-icon
-                                ><span>{{ cItem.label }}</span>
+                                <el-icon><component :is="cItem.icon" /></el-icon>
+                                <span>{{ cItem.label }}</span>
                             </el-menu-item>
                         </template>
                     </el-sub-menu>

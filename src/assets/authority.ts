@@ -13,19 +13,36 @@ export default {
                 {
                     label: 'button',
                     index: '/components/button',
-                    icon: 'Minus'
+                    icon: 'PriceTag'
                 },
                 {
                     label: 'table',
                     index: '/components/table',
-                    icon: 'Minus'
+                    icon: 'PriceTag'
                 },
             ],
         },
         {
             label: 'echarts',
             index: '/echarts/index',
-            icon: 'TrendCharts'
+            icon: 'TrendCharts',
+            children: [
+                {
+                    label: 'columnChart',
+                    index: '/echarts/columnChart',
+                    icon: 'PriceTag'
+                },
+                {
+                    label: 'lineEchart',
+                    index: '/echarts/lineEchart',
+                    icon: 'PriceTag'
+                },
+                {
+                    label: 'pieChart',
+                    index: '/echarts/pieChart',
+                    icon: 'PriceTag'
+                },
+            ],
         },
     ],
     system: [
@@ -42,19 +59,36 @@ export default {
                 {
                     label: 'button',
                     index: '/components/button',
-                    icon: 'Minus'
+                    icon: 'PriceTag'
                 },
                 {
                     label: 'table',
                     index: '/components/table',
-                    icon: 'Minus'
+                    icon: 'PriceTag'
                 },
             ],
         },
         {
             label: 'echarts',
             index: '/echarts/index',
-            icon: 'TrendCharts'
+            icon: 'TrendCharts',
+            children: [
+                {
+                    label: 'columnChart',
+                    index: '/echarts/columnChart',
+                    icon: 'PriceTag'
+                },
+                {
+                    label: 'lineEchart',
+                    index: '/echarts/lineEchart',
+                    icon: 'PriceTag'
+                },
+                {
+                    label: 'pieChart',
+                    index: '/echarts/pieChart',
+                    icon: 'PriceTag'
+                },
+            ],
         },
     ],
     common: [
@@ -71,19 +105,36 @@ export default {
                 {
                     label: 'button',
                     index: '/components/button',
-                    icon: 'Minus'
+                    icon: 'PriceTag'
                 },
                 {
                     label: 'table',
                     index: '/components/table',
-                    icon: 'Minus'
+                    icon: 'PriceTag'
                 },
             ],
         },
         {
             label: 'echarts',
             index: '/echarts/index',
-            icon: 'TrendCharts'
+            icon: 'TrendCharts',
+            children: [
+                {
+                    label: 'columnChart',
+                    index: '/echarts/columnChart',
+                    icon: 'PriceTag'
+                },
+                {
+                    label: 'lineEchart',
+                    index: '/echarts/lineEchart',
+                    icon: 'PriceTag'
+                },
+                {
+                    label: 'pieChart',
+                    index: '/echarts/pieChart',
+                    icon: 'PriceTag'
+                },
+            ],
         },
     ]
 }
