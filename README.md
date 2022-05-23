@@ -33,3 +33,57 @@ store 持续化：
 ### 嵌套路由无法访问
 
 在子路由 path 中开头不写‘/’
+
+### store 失去响应
+
+```javascript
+// 失去响应用法：
+import { useMainStore } from '@/stores/index'
+const store = useMainStore()
+const title = store.title
+
+// 响应
+import { useMainStore } from '@/stores/index'
+import { storeToRefs } from 'pinia'
+const store = useMainStore()
+const { title } = storeToRefs(store)
+```
+
+### 使用获取 storeToRefs 的内容时，computed 响应式失效
+
+获取 ref 内容时，需要带.value
+
+```javascript
+import { useMainStore } from '@/stores/index'
+const store = useMainStore()
+const { expand } = storeToRefs(store)
+//错误用法：
+const styleComputed = computed(() => {
+    return expand
+        ? {
+              width: '0px',
+              opacity: 0,
+              padding: '0',
+          }
+        : {
+              width: '120px',
+              opacity: 1,
+              padding: '0 10px',
+          }
+})
+
+// 正确
+const styleComputed = computed(() => {
+    return expand.value
+        ? {
+              width: '0px',
+              opacity: 0,
+              padding: '0',
+          }
+        : {
+              width: '120px',
+              opacity: 1,
+              padding: '0 10px',
+          }
+})
+```

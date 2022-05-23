@@ -2,10 +2,16 @@
     <div class="top-wrapper">
         <div class="left" @click="goBack">
             <div class="left-logo">涂</div>
-            <div class="left-text">Tt Admin</div>
+            <div class="left-text" :style="styleComputed">Tt Admin</div>
         </div>
         <div class="center">
-            <el-icon class="center-icon" :size="24"><Expand /></el-icon>
+            <el-icon
+                class="center-icon"
+                style="cursor: pointer"
+                @click="store.expandToggle()"
+                :size="24"
+                ><component :is="expand ? 'Expand' : 'Fold'"
+            /></el-icon>
             <div class="center-text">{{ title }}</div>
         </div>
         <div class="right">right</div>
@@ -13,14 +19,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, Ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useMainStore } from '@/stores/index'
-
+import { storeToRefs } from 'pinia'
 const store = useMainStore()
-const title = store.title
-
+const { title, expand } = storeToRefs(store)
 const router = useRouter()
+const styleComputed = computed(() => {
+    return expand.value
+        ? {
+              width: '0px',
+              opacity: 0,
+              padding: '0',
+          }
+        : {
+              width: '120px',
+              opacity: 1,
+              padding: '0 10px',
+          }
+})
 
 const goBack = () => {
     router.push({ name: 'home' })
@@ -41,6 +59,7 @@ const goBack = () => {
         align-items: center;
         cursor: pointer;
         &-logo {
+            margin-right: 20px;
             height: 38px;
             width: 38px;
             line-height: 38px;
@@ -51,11 +70,14 @@ const goBack = () => {
         }
         &-text {
             padding: 0 10px;
-            margin-left: 20px;
+            height: 26px;
             font-size: 20px;
             font-weight: bold;
             border-left: 3px solid rgb(0, 147, 211);
             border-right: 3px solid rgb(0, 147, 211);
+            box-sizing: border-box;
+            transition: all ease 1s;
+            overflow: hidden;
         }
     }
     .center {

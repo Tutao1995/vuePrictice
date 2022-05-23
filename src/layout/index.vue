@@ -4,6 +4,7 @@
         <div class="home-content">
             <the-nav
                 class="home-content-nav"
+                :style="{ width: expand ? '65px' : '200px' }"
                 :nav="navList"
                 @open="handleOpen"
                 @close="handleClose"
@@ -22,15 +23,13 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { useMainStore } from '@/stores/index'
+import { storeToRefs } from 'pinia'
 import authority from '@/assets/authority'
 import theNav from './components/nav.vue'
 import theTop from './components/top.vue'
 
 const mainStore = useMainStore()
-
-// if (sessionStorage.getItem('store')) {
-//     mainStore.$state = JSON.parse(sessionStorage.getItem('store') as string)
-// }
+const { expand } = storeToRefs(mainStore)
 const authorityStore = mainStore.authority
 const authorities = authority[authorityStore]
 
@@ -41,11 +40,6 @@ const handleOpen = (key: string, keyPath: string[]) => {
 const handleClose = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }
-
-// window.addEventListener('beforeunload', () => {
-//     debugger
-//     sessionStorage.setItem('store', JSON.stringify(mainStore.$state))
-// })
 </script>
 
 <style lang="scss" scoped>
@@ -68,13 +62,16 @@ const handleClose = (key: string, keyPath: string[]) => {
         display: flex;
         &-nav {
             margin-right: 20px;
-            width: 200px;
+            // width: 200px;
             height: 100%;
+            transition: width ease 1s;
         }
         &-box {
             position: relative;
             height: 100%;
-            width: calc(100% - 220px);
+            // width: calc(100% - 220px);
+            flex: 1;
+            overflow-x: hidden; // 防止缩放菜单栏出现横向滚动条
         }
     }
 }

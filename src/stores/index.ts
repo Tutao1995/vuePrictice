@@ -26,6 +26,9 @@ export const useMainStore = defineStore({
         },
         async changeTitleState(value: string) {
             this.title = value
+        },
+        async expandToggle() {
+            this.expand = !this.expand
         }
     },
     // store 持续化  避免刷新内容清空

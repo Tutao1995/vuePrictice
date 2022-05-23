@@ -3,6 +3,7 @@
         <el-menu
             class="el-menu-vertical"
             :default-active="defaultRoute"
+            :collapse="expand"
             active-text-color="rgb(80, 97, 109)"
             background-color="#545c64"
             text-color="#fff"
@@ -15,7 +16,7 @@
                     <el-sub-menu :index="item.index">
                         <template #title
                             ><el-icon><component :is="item.icon" /></el-icon
-                            >{{ item.label }}</template
+                            ><span>{{ item.label }}</span></template
                         >
                         <template v-if="item.children">
                             <el-menu-item
@@ -23,7 +24,8 @@
                                 :index="cItem.index"
                                 :key="cItem.index"
                             >
-                                <el-icon><component :is="cItem.icon" /></el-icon>{{ cItem.label }}
+                                <el-icon><component :is="cItem.icon" /></el-icon
+                                ><span>{{ cItem.label }}</span>
                             </el-menu-item>
                         </template>
                     </el-sub-menu>
@@ -31,7 +33,7 @@
                 <template v-else>
                     <el-menu-item :index="item.index"
                         ><el-icon><component :is="item.icon" /></el-icon
-                        >{{ item.label }}</el-menu-item
+                        ><span>{{ item.label }}</span></el-menu-item
                     >
                 </template>
             </template>
@@ -42,6 +44,10 @@
 <script lang="ts" setup>
 import { defineProps, defineEmits, PropType, onMounted, ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useMainStore } from '@/stores/index'
+import { storeToRefs } from 'pinia'
+const store = useMainStore()
+const { expand } = storeToRefs(store)
 
 const route = useRoute()
 
@@ -85,7 +91,9 @@ const handleClose = (key: string, keyPath: string[]) => {
 
 <style scoped lang="scss">
 .el-menu-vertical {
+    // width: 200px;
     height: 100%;
+    overflow: hidden;
 }
 .el-menu-item.is-active {
     position: relative;
