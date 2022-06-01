@@ -9,7 +9,8 @@ import Particles from "particles.vue3"
 import 'element-plus/dist/index.css'
 // 饿了么图标库组件
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-
+// 引入指令
+import directives from '@/directives/index'
 
 const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
@@ -18,4 +19,5 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(router)
 app.use(pinia)
 app.use(Particles)
+app.use(directives)
 app.mount('#app')

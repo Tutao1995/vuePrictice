@@ -73,7 +73,7 @@ const { x, y } = useMouse()
 const showRef = ref<HTMLElement>()
 const countRef = ref<HTMLElement>()
 const draggableComputed = computed(() => true)
-useDraggable(countRef, showRef, draggableComputed)
+useDraggable(countRef,countRef, showRef, draggableComputed)
 </script>
 
 <style lang="scss" scoped>

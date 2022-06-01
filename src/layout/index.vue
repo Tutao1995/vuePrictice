@@ -72,6 +72,7 @@ const handleClose = (key: string, keyPath: string[]) => {
             // width: calc(100% - 220px);
             flex: 1;
             overflow-x: hidden; // 防止缩放菜单栏出现横向滚动条
+            box-shadow: 0 0 14px #b4b1b1;
         }
     }
 }

@@ -3,7 +3,7 @@ import type { ComputedRef, Ref } from 'vue'
 import { addUnit } from '@/utils/index'
 
 
-export const useDraggable = (targetRef: Ref<HTMLElement | undefined>, dragRef: Ref<HTMLElement | undefined>, draggable: ComputedRef<boolean>) => {
+export const useDraggable = (targetRef: Ref<HTMLElement | undefined>, dragRef: Ref<HTMLElement | undefined>, outerRef: Ref<HTMLElement | undefined>, draggable: ComputedRef<boolean>) => {
     let transform = {
         offsetX: 0,
         offsetY: 0
@@ -11,7 +11,8 @@ export const useDraggable = (targetRef: Ref<HTMLElement | undefined>, dragRef: R
     const onMousedown = (e: MouseEvent) => {
         const downX = e.clientX;
         const downY = e.clientY;
-        const { offsetX, offsetY } = transform
+        const { offsetX, offsetY } = transform;
+        console.log(offsetX, offsetY, "offsetX, offsetY")
 
         const targeRect = targetRef.value!.getBoundingClientRect();
         const targetTop = targeRect.top;
@@ -26,6 +27,7 @@ export const useDraggable = (targetRef: Ref<HTMLElement | undefined>, dragRef: R
         const minLeft = -targetLeft + offsetX;
         const maxTop = clientHeight - targetTop - targetHeight + offsetY
         const maxLeft = clientWidth - targetLeft - targetWidth + offsetX
+
 
 
         const onMousemove = (e: MouseEvent) => {

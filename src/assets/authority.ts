@@ -44,6 +44,38 @@ export default {
                 },
             ],
         },
+        {
+            label: 'directives',
+            index: '/directives/index',
+            icon: 'Management',
+            children: [
+                {
+                    label: 'copy',
+                    index: '/directives/copy',
+                    icon: 'PriceTag'
+                },
+                {
+                    label: 'clickOutside',
+                    index: '/directives/clickOutside',
+                    icon: 'PriceTag'
+                },
+                {
+                    label: 'draggable',
+                    index: '/directives/draggable',
+                    icon: 'PriceTag'
+                },
+                {
+                    label: 'debounce',
+                    index: '/directives/debounce',
+                    icon: 'PriceTag'
+                },
+                {
+                    label: 'throttle',
+                    index: '/directives/throttle',
+                    icon: 'PriceTag'
+                },
+            ],
+        },
     ],
     system: [
         {
