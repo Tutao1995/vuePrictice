@@ -2,17 +2,17 @@ import { RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/home',
-    name: 'home',
-    redirect: '/home/index',
+    path: '/color',
+    name: 'color',
+    redirect: '/color/index',
     component: () => import('@/layout/index.vue'),
     children: [
       {
-        name: 'home',
+        name: 'color',
         path: 'index',
-        component: () => import('@/pages/home/index.vue'),
+        component: () => import('@/pages/color/index.vue'),
         meta: {
-          title: '首页'
+          title: '颜色'
         }
       },
     ]

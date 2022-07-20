@@ -24,7 +24,7 @@
 import { reactive } from 'vue'
 import { useMainStore } from '@/stores/index'
 import { storeToRefs } from 'pinia'
-import authority from '@/assets/authority'
+import authority from '@/assets/js/authority'
 import theNav from './components/nav.vue'
 import theTop from './components/top.vue'
 

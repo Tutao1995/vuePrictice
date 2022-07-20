@@ -6,6 +6,11 @@ export default {
             icon: 'HomeFilled'
         },
         {
+            label: '颜色',
+            index: '/color/index',
+            icon: 'PictureFilled'
+        },
+        {
             label: '组件',
             index: '/components/button',
             icon: 'Menu',

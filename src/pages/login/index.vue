@@ -28,12 +28,12 @@
 </template>
 
 <script setup lang="ts">
-import { option1, option2, option3 } from '@/assets/particles'
+import { option1, option2, option3 } from '@/assets/js/particles'
 import { ref } from 'vue'
 import { ElNotification } from 'element-plus'
 import { useMainStore } from '@/stores/index'
 import { useRouter } from 'vue-router'
-import { authorityType } from '@/assets/authority'
+import { authorityType } from '@/assets/js/authority'
 
 const mainStore = useMainStore()
 const updateLoginState = (value: authorityType) => {

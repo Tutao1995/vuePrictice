@@ -1,24 +1,24 @@
 <template>
-    <div ref="showRef">x: {{ x }}, y: {{ y }}</div>
-    <div class="box" ref="showRef">
-        <div ref="countRef">{{ count }}</div>
-    </div>
+  <div ref="showRef">x: {{ x }}, y: {{ y }}</div>
+  <div class="box" ref="showRef">
+    <div ref="countRef">{{ count }}</div>
+  </div>
 
-    <el-button @click="add">+</el-button>
-    <el-button @click="cut">-</el-button>
-    <el-button @click="openModal">openModal</el-button>
-    <el-button @click="dialogVisibleShow">dialogVisible</el-button>
+  <el-button @click="add">+</el-button>
+  <el-button @click="cut">-</el-button>
+  <el-button @click="openModal">openModal</el-button>
+  <el-button @click="dialogVisibleShow">dialogVisible</el-button>
 
-    <Modal v-model="modalVisible" @ok-handle="onOk" @cancel-handle="onCancel" />
-    <el-dialog v-model="dialogVisible" title="Tips" width="30%">
-        <span>This is a message</span>
-        <template #footer>
-            <span class="dialog-footer">
-                <el-button @click="dialogVisible = false">Cancel</el-button>
-                <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
-            </span>
-        </template>
-    </el-dialog>
+  <Modal v-model="modalVisible" @ok-handle="onOk" @cancel-handle="onCancel" />
+  <el-dialog v-model="dialogVisible" title="Tips" width="30%">
+    <span>This is a message</span>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script lang="ts" setup>
@@ -32,14 +32,14 @@ import Modal from '@/components/Modal.vue'
  */
 let modalVisible = ref<boolean>(false)
 const openModal = () => {
-    modalVisible.value = true
+  modalVisible.value = true
 }
 const onOk = () => {
-    modalVisible.value = false
+  modalVisible.value = false
 }
 const onCancel = (value: boolean) => {
-    console.log(value)
-    modalVisible.value = value
+  console.log(value)
+  modalVisible.value = value
 }
 /**
  *
@@ -47,7 +47,7 @@ const onCancel = (value: boolean) => {
  */
 let dialogVisible = ref<boolean>(false)
 const dialogVisibleShow = () => {
-    dialogVisible.value = true
+  dialogVisible.value = true
 }
 
 /**
@@ -56,10 +56,10 @@ const dialogVisibleShow = () => {
  */
 const count = ref<number>(0)
 const add = () => {
-    count.value++
+  count.value++
 }
 const cut = () => {
-    count.value--
+  count.value--
 }
 
 /**
@@ -73,13 +73,13 @@ const { x, y } = useMouse()
 const showRef = ref<HTMLElement>()
 const countRef = ref<HTMLElement>()
 const draggableComputed = computed(() => true)
-useDraggable(countRef,countRef, showRef, draggableComputed)
+useDraggable(countRef, countRef, showRef, draggableComputed)
 </script>
 
 <style lang="scss" scoped>
 .box {
-    width: 500px;
-    height: 500px;
-    border: 1px solid #eee;
+  width: 500px;
+  height: 500px;
+  border: 1px solid #eee;
 }
 </style>
