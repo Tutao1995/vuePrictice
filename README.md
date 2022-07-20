@@ -87,3 +87,10 @@ const styleComputed = computed(() => {
           }
 })
 ```
+
+
+### npm run build 报错  Cannot access ambient const enums when the '--isolatedModules' flag is provide
+
+解决方式： 
+- script 语句中添加  --skipLibCheck 
+- 在tsconfig配置添加  skipLibCheck: false
