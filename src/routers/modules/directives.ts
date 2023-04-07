@@ -47,6 +47,14 @@ const routes: RouteRecordRaw[] = [
           title: '自定义指令/clickOutside'
         }
       },
+      {
+        name: 'useModel',
+        path: 'useModel',
+        component: () => import('@/pages/directives/vModel/index.vue'),
+        meta: {
+          title: '自定义指令/useModel'
+        }
+      },
     ]
   },
 ]

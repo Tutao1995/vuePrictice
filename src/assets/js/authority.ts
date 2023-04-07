@@ -79,6 +79,11 @@ export default {
                     index: '/directives/throttle',
                     icon: 'PriceTag'
                 },
+                {
+                  label: 'useModel',
+                  index: '/directives/useModel',
+                  icon: 'PriceTag'
+              },
             ],
         },
     ],
