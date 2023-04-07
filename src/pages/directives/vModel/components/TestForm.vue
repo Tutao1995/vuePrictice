@@ -9,21 +9,37 @@
           <el-option v-for="item of options" :key="item.value" :label="item.label" :value="item.value"></el-option>
         </el-select>
       </div>
+      <span>{{ start }}</span>
+      <el-button @click="changeStart">点我</el-button>
+      <el-button @click="stop">点我</el-button>
     </el-form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, PropType } from 'vue';
+import { defineProps, defineEmits, PropType, ref } from 'vue';
 import { useModel } from '@/hooks/useModel';
+import { useCountTransition } from '@/hooks/useCountTransition'
 import { FormType } from '../types/index'
 const model = defineProps({
   modelValue: Object as PropType<FormType>
 })
 const emit = defineEmits(['update:modelValue'])
 const obj = useModel(model, 'modelValue', emit);
-console.log(obj, "obj")
 
+const start = ref(10);
+const end = ref(1000);
+const changeStart = () => {
+  end.value += 100
+  const { timer } = useCountTransition(start, end, 3, () => {
+  })
+}
+
+const stop = () => {
+  end.value -= 100
+  const { timer } = useCountTransition(start, end, 3, () => {
+  })
+}
 
 const options = [
   {
