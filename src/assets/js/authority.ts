@@ -80,10 +80,15 @@ export default {
                     icon: 'PriceTag'
                 },
                 {
-                  label: 'useModel',
-                  index: '/directives/useModel',
-                  icon: 'PriceTag'
-              },
+                    label: 'useModel',
+                    index: '/directives/useModel',
+                    icon: 'PriceTag'
+                },
+                {
+                    label: 'contextMenu',
+                    index: '/directives/contextMenu',
+                    icon: 'PriceTag'
+                },
             ],
         },
     ],
