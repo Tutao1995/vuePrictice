@@ -1,5 +1,5 @@
 import { Ref, onMounted, onUnmounted } from "vue"
-export default function useContextMenu(refDom: Ref, left: Ref<number>, top: Ref<number>, isShow: Ref<boolean>) {
+export default function useContextMenu(refDom: Ref, left: Ref<number>, top: Ref<number>, isShow: Ref<boolean>, currentRef: Ref, type: 'item1' | 'item2') {
   const handler = (e: MouseEvent) => {
     isShow.value = false
     e.stopPropagation();
@@ -9,7 +9,8 @@ export default function useContextMenu(refDom: Ref, left: Ref<number>, top: Ref<
       console.log(clientX, clientY)
       left.value = clientX
       top.value = clientY
-      isShow.value = true
+      isShow.value = true;
+      currentRef.value = type
     }, 50);
   }
   const hideHandler = () => {

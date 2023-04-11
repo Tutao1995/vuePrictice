@@ -1,33 +1,46 @@
 <template>
   <div class="wrapper">
     <p>{{ showValue }}</p>
-    <Context-Menu :options="options" :left="pageLeft" :top="pageTop" :isShow="isShow" @itemClick="itemClick" />
+    <Context-Menu :options="currentOptions" :left="pageLeft" :top="pageTop" :isShow="isShow" @itemClick="itemClick" />
     <div class="item-1 test-item" ref="item1"></div>
     <div class="item-2 test-item" ref="item2"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import useContextMenu from '@/hooks/useContextMenu'
 import ContextMenu from './components/ContextMenu.vue';
 import { optionItemType } from './types'
 
+const optionsMap = {
+  item1: [
+    { label: 'options-1', id: 'option-1' },
+    { label: 'options-2', id: 'option-2' },
+    { label: 'options-3', id: 'option-3' },
+    { label: 'options-4', id: 'option-4' },
+    { label: 'options-5', id: 'option-5' }
+  ],
+  item2: [
+    { label: 'options-1', id: 'option-1' },
+    { label: 'options-2', id: 'option-2' },
+    { label: 'options-3', id: 'option-3' },
+  ]
+}
+const currentRef = ref<'item1' | 'item2'>('item1')
 
-const options = [
-  { label: 'options-1', id: 'option-1' },
-  { label: 'options-2', id: 'option-2' },
-  { label: 'options-3', id: 'option-3' },
-  { label: 'options-4', id: 'option-4' },
-  { label: 'options-5', id: 'option-5' }
-]
+const currentOptions = computed(() => {
+  return optionsMap[currentRef.value]
+})
+
 const pageLeft = ref<number>(0)
 const pageTop = ref<number>(0)
 const isShow = ref<boolean>(false)
 const item1 = ref(null)
 const item2 = ref(null)
 
-useContextMenu(item1, pageLeft, pageTop, isShow)
+useContextMenu(item1, pageLeft, pageTop, isShow, currentRef, 'item1')
+useContextMenu(item2, pageLeft, pageTop, isShow, currentRef, 'item2')
 
 
 const showValue = ref<string>('')
