@@ -42,8 +42,8 @@ const enterHandler = (el: HTMLElement) => {
   el.style.height = '0'
   requestAnimationFrame(() => {
     el.style.height = height + 'px';
+    el.style.transition = 'height 0.4s ease-in-out';
     el.style.overflow = 'auto'
-    el.style.transition = 'height 0.2s ease-out'
   })
 }
 

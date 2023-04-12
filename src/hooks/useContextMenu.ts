@@ -6,7 +6,6 @@ export default function useContextMenu(refDom: Ref, left: Ref<number>, top: Ref<
     e.preventDefault();
     setTimeout(() => {
       const { clientX, clientY } = e;
-      console.log(clientX, clientY)
       left.value = clientX
       top.value = clientY
       isShow.value = true;
@@ -20,13 +19,19 @@ export default function useContextMenu(refDom: Ref, left: Ref<number>, top: Ref<
     refDom.value.addEventListener('contextmenu', handler, true)
     document.addEventListener('click', hideHandler)
     document.addEventListener('scroll', hideHandler)
-    // let tempParent = refDom.value.parentNode;
-    // while (tempParent) {
-
-    // }
+    let tempParent = refDom.value.parentElement;
+    while (tempParent) {
+      tempParent.addEventListener('scroll', hideHandler);
+      tempParent = tempParent.parentElement
+    }
   })
   onUnmounted(() => {
     refDom.value.removeEventListener('contextmenu', handler, true)
-    document.removeEventListener('click', hideHandler)
+    document.removeEventListener('click', hideHandler);
+    let tempParent = refDom.value.parentElement;
+    while (tempParent) {
+      tempParent.removeEventListener('scroll', hideHandler);
+      tempParent = tempParent.parentElement
+    }
   })
 }
