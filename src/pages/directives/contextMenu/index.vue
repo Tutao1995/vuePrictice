@@ -19,7 +19,9 @@ const optionsMap = {
     { label: 'options-2', id: 'option-2' },
     { label: 'options-3', id: 'option-3' },
     { label: 'options-4', id: 'option-4' },
-    { label: 'options-5', id: 'option-5' }
+    { label: 'options-5', id: 'option-5' },
+    { label: 'options-6', id: 'option-6' },
+    { label: 'options-7', id: 'option-7' }
   ],
   item2: [
     { label: 'options-1', id: 'option-1' },

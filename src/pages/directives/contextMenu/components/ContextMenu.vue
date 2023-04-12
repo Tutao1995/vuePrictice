@@ -32,7 +32,6 @@ const itemClickHandler = ($event: MouseEvent, item: optionItemType) => {
 
 
 const beforeEnterHandler = (el: HTMLElement) => {
-  console.log(el);
   el.style.height = '0px';
 }
 
@@ -42,8 +41,9 @@ const enterHandler = (el: HTMLElement) => {
   const height = el.clientHeight
   el.style.height = '0'
   requestAnimationFrame(() => {
-    el.style.height = height + 'px'
-    el.style.transition = 'height 0.3s ease'
+    el.style.height = height + 'px';
+    el.style.overflow = 'auto'
+    el.style.transition = 'height 0.2s ease-out'
   })
 }
 
@@ -62,6 +62,7 @@ li {
 .context-menu-wrapper {
   position: fixed;
   width: 200px;
+  max-height: 200px;
   background: #fff;
   border: 1px solid #eee;
   border-radius: 6px;
@@ -79,19 +80,5 @@ li {
       background: burlywood;
     }
   }
-}
-
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
 }
 </style>

@@ -19,6 +19,11 @@ export default function useContextMenu(refDom: Ref, left: Ref<number>, top: Ref<
   onMounted(() => {
     refDom.value.addEventListener('contextmenu', handler, true)
     document.addEventListener('click', hideHandler)
+    document.addEventListener('scroll', hideHandler)
+    // let tempParent = refDom.value.parentNode;
+    // while (tempParent) {
+
+    // }
   })
   onUnmounted(() => {
     refDom.value.removeEventListener('contextmenu', handler, true)
