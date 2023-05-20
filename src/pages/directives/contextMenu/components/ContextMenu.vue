@@ -2,8 +2,8 @@
   <Teleport to="body">
     <Transition @beforeEnter="beforeEnterHandler" @beforeLeave="leaveHandler" @enter="enterHandler">
       <ul class="context-menu-wrapper" v-if="isShow" :style="{
-        left: left + 'px', top: top + 'px'
-      }">
+          left: left + 'px', top: top + 'px'
+        }">
         <li @click="itemClickHandler($event, item)" class="context-menu-item" v-for="item of options" :key="item.id">{{
           item.label
         }}</li>
@@ -31,24 +31,29 @@ const itemClickHandler = ($event: MouseEvent, item: optionItemType) => {
 
 
 
-const beforeEnterHandler = (el: HTMLElement) => {
-  el.style.height = '0px';
+const beforeEnterHandler = (el: Element) => {
+  const element = el as HTMLElement
+  element.style.height = '0px';
 }
 
-const enterHandler = (el: HTMLElement) => {
-  el.style.height = 'auto'
-  el.style.overflow = 'hidden'
-  const height = el.clientHeight
-  el.style.height = '0'
+const enterHandler = (el: Element) => {
+  const element = el as HTMLElement
+  element.style.height = 'auto'
+  element.style.overflow = 'hidden'
+  const height = element.clientHeight
+  element.style.height = '0'
   requestAnimationFrame(() => {
-    el.style.height = height + 'px';
-    el.style.transition = 'height 0.4s ease-in-out';
-    el.style.overflow = 'auto'
+    element.style.transition = 'height 0.2s ease-in-out';
+    element.style.height = height + 'px';
+    setTimeout(() => {
+      element.style.overflow = 'auto'
+    }, 200)
   })
 }
 
-const leaveHandler = (el: HTMLElement) => {
-  el.style.transition = 'none'
+const leaveHandler = (el: Element) => {
+  const element = el as HTMLElement
+  element.style.transition = 'none'
 }
 </script>
 
@@ -75,6 +80,7 @@ li {
     text-align: left;
     box-sizing: border-box;
     transition: background .3s ease;
+    cursor: pointer;
 
     &:hover {
       background: burlywood;

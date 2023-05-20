@@ -91,6 +91,30 @@ export default {
                 },
             ],
         },
+        {
+            label: 'leetCode',
+            index: '/leetCode/index',
+            icon: 'Aim',
+            children: [
+                {
+                    label: '队列',
+                    index: '/leetCode/queue',
+                    icon: 'PriceTag'
+                }
+            ],
+        },
+        {
+            label: 'vue3 源码',
+            index: '/vueSourceCode/index',
+            icon: 'Money',
+            children: [
+                {
+                    label: 'reactivity',
+                    index: '/vueSourceCode/reactivity',
+                    icon: 'PriceTag'
+                }
+            ],
+        },
     ],
     system: [
         {

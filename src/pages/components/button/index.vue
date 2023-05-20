@@ -9,7 +9,12 @@
   <el-button @click="openModal">openModal</el-button>
   <el-button @click="dialogVisibleShow">dialogVisible</el-button>
 
+
+  <el-button @click="openChatDialogHandler">openChatDialog</el-button>
   <Modal v-model="modalVisible" @ok-handle="onOk" @cancel-handle="onCancel" />
+  <ChatDialog :visible="visible" @close="closeDialogHandler">
+    <p>我是谈拆给你</p>
+  </ChatDialog>
   <el-dialog v-model="dialogVisible" title="Tips" width="30%">
     <span>This is a message</span>
     <template #footer>
@@ -26,6 +31,7 @@ import { reactive, ref, computed } from 'vue'
 import useMouse from '@/hooks/useMouse'
 import { useDraggable } from '@/hooks/useDraggable'
 import Modal from '@/components/Modal.vue'
+import ChatDialog from '@/components/Dialog.vue'
 /**
  *
  * 自定义弹窗相关
@@ -73,7 +79,21 @@ const { x, y } = useMouse()
 const showRef = ref<HTMLElement>()
 const countRef = ref<HTMLElement>()
 const draggableComputed = computed(() => true)
-useDraggable(countRef, countRef, showRef, draggableComputed)
+useDraggable(countRef, countRef, showRef, draggableComputed);
+
+
+
+/* 
+chatgpt 组件
+*/
+const visible = ref<boolean>(false);
+
+const closeDialogHandler = () => {
+  visible.value = false
+}
+const openChatDialogHandler = () => {
+  visible.value = true
+}
 </script>
 
 <style lang="scss" scoped>
