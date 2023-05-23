@@ -1,29 +1,26 @@
 <template>
-  <div ref="showRef">x: {{ x }}, y: {{ y }}</div>
-  <div class="box" ref="showRef">
-    <div ref="countRef">{{ count }}</div>
-  </div>
-
-  <el-button @click="add">+</el-button>
-  <el-button @click="cut">-</el-button>
-  <el-button @click="openModal">openModal</el-button>
-  <el-button @click="dialogVisibleShow">dialogVisible</el-button>
-
-
-  <el-button @click="openChatDialogHandler">openChatDialog</el-button>
-  <Modal v-model="modalVisible" @ok-handle="onOk" @cancel-handle="onCancel" />
-  <ChatDialog :visible="visible" @close="closeDialogHandler">
-    <p>我是谈拆给你</p>
-  </ChatDialog>
-  <el-dialog v-model="dialogVisible" title="Tips" width="30%">
-    <span>This is a message</span>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
-      </span>
-    </template>
-  </el-dialog>
+    <div ref="showRef">x: {{ x }}, y: {{ y }}</div>
+    <div class="box" ref="showRef">
+        <div ref="countRef">{{ count }}</div>
+    </div>
+    <el-button @click="add" v-auth="['admin', 'common']">+</el-button>
+    <el-button @click="cut" v-auth="['admin', 'common']">-</el-button>
+    <el-button @click="openModal" v-auth="['common']">openModal</el-button>
+    <el-button @click="dialogVisibleShow" v-auth="['admin', 'system']">dialogVisible</el-button>
+    <el-button @click="openChatDialogHandler" v-auth="['system']">openChatDialog</el-button>
+    <Modal v-model="modalVisible" @ok-handle="onOk" @cancel-handle="onCancel" />
+    <ChatDialog :visible="visible" @close="closeDialogHandler">
+        <p>我是谈拆给你</p>
+    </ChatDialog>
+    <el-dialog v-model="dialogVisible" title="Tips" width="30%">
+        <span>This is a message</span>
+        <template #footer>
+            <span class="dialog-footer">
+                <el-button @click="dialogVisible = false">Cancel</el-button>
+                <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
+            </span>
+        </template>
+    </el-dialog>
 </template>
 
 <script lang="ts" setup>
@@ -38,14 +35,14 @@ import ChatDialog from '@/components/Dialog.vue'
  */
 let modalVisible = ref<boolean>(false)
 const openModal = () => {
-  modalVisible.value = true
+    modalVisible.value = true
 }
 const onOk = () => {
-  modalVisible.value = false
+    modalVisible.value = false
 }
 const onCancel = (value: boolean) => {
-  console.log(value)
-  modalVisible.value = value
+    console.log(value)
+    modalVisible.value = value
 }
 /**
  *
@@ -53,7 +50,7 @@ const onCancel = (value: boolean) => {
  */
 let dialogVisible = ref<boolean>(false)
 const dialogVisibleShow = () => {
-  dialogVisible.value = true
+    dialogVisible.value = true
 }
 
 /**
@@ -62,10 +59,10 @@ const dialogVisibleShow = () => {
  */
 const count = ref<number>(0)
 const add = () => {
-  count.value++
+    count.value++
 }
 const cut = () => {
-  count.value--
+    count.value--
 }
 
 /**
@@ -89,17 +86,17 @@ chatgpt 组件
 const visible = ref<boolean>(false);
 
 const closeDialogHandler = () => {
-  visible.value = false
+    visible.value = false
 }
 const openChatDialogHandler = () => {
-  visible.value = true
+    visible.value = true
 }
 </script>
 
 <style lang="scss" scoped>
 .box {
-  width: 500px;
-  height: 500px;
-  border: 1px solid #eee;
+    width: 500px;
+    height: 500px;
+    border: 1px solid #eee;
 }
 </style>

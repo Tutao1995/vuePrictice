@@ -11,19 +11,8 @@
 import CodeEditor from '@/components/CodeEditor.vue'
 import computedSource from './source/computed';
 import effectSource from './source/computed';
-import { reactive, computed } from 'vue'
-const list = reactive(['computedSource', 'effectSource']);
 
-
-const computedList = computed(() => {
-    return list.map(item => {
-        return {
-            title: item,
-            code: 
-        }
-    })
-})
-
+const code = ref(computedSource)
 
 
 
