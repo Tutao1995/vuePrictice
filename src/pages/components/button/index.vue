@@ -21,6 +21,12 @@
             </span>
         </template>
     </el-dialog>
+    <div>
+        <p class="text1">为你定制 发现精彩</p>
+        <p class="text2">为你定制 发现精彩</p>
+        <div class="loader"></div>
+    </div>
+    {{ testNumber }} {{ testNumberHandler(testNumber) }}
 </template>
 
 <script lang="ts" setup>
@@ -91,12 +97,63 @@ const closeDialogHandler = () => {
 const openChatDialogHandler = () => {
     visible.value = true
 }
+
+let testNumber = 12345678;
+
+/* 
+    /B   非边界匹配     比如： hello   -》  h,e,l,l,o
+    /b   边界匹配       比如： hell0   ->  ,hello,
+    \d   数字
+    {3}  匹配多少次
+    +    一次或者多次
+    ?=   前瞻
+    ?!   非前瞻
+    ()   匹配
+*/
+function testNumberHandler(testNumber: number) {
+    return String(testNumber).replace(/\B(?=(\d{3})+(?!\d))/g, ',') //d{3}+/
+}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss"  scoped>
 .box {
     width: 500px;
     height: 500px;
     border: 1px solid #eee;
+}
+
+.text1 {
+    background-image: linear-gradient(#FFCF02, #FF7352);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px #333;
+}
+
+.text2 {
+    -webkit-text-stroke: 2px #333;
+}
+
+.loader {
+    --n: 120px;
+    width: var(--n);
+    height: 120px;
+    background: conic-gradient(from 45deg, #2196F3 25%, #F44336 0 50%, #4CAF50 0 75%, #FFC107 0);
+    -webkit-mask: radial-gradient(50% 50%, #000 96%, #0000) left/35% 35% no-repeat;
+    animation: load 2s infinite;
+}
+
+@keyframes load {
+    25% {
+        -webkit-mask-position: top
+    }
+
+    50% {
+        -webkit-mask-position: right
+    }
+
+    75% {
+        -webkit-mask-position: bottom
+    }
 }
 </style>
