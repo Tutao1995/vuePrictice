@@ -6,9 +6,12 @@
             <template v-for="item of props.nav" :key="item.index">
                 <template v-if="item.children">
                     <el-sub-menu :index="item.index">
-                        <template #title><el-icon>
+                        <template #title>
+                            <el-icon>
                                 <component :is="item.icon" />
-                            </el-icon><span>{{ item.label }}</span></template>
+                            </el-icon>
+                            <span>{{ item.label }}</span>
+                        </template>
                         <template v-if="item.children">
                             <el-menu-item v-for="cItem of item.children" :index="cItem.index" :key="cItem.index">
                                 <el-icon>
