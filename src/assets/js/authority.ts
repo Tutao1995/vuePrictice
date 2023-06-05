@@ -25,6 +25,11 @@ export default {
                     index: '/components/table',
                     icon: 'PriceTag'
                 },
+                {
+                    label: 'virtualList',
+                    index: '/components/virtualList',
+                    icon: 'PriceTag'
+                }
             ],
         },
         {
