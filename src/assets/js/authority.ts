@@ -52,6 +52,11 @@ export default {
                     index: '/echarts/pieChart',
                     icon: 'PriceTag'
                 },
+                {
+                    label: 'categoryChart',
+                    index: '/echarts/categoryChart',
+                    icon: 'PriceTag'
+                },
             ],
         },
         {

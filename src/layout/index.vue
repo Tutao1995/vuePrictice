@@ -11,7 +11,7 @@
             />
             <div class="home-content-box">
                 <router-view v-slot="{ Component }">
-                    <keep-alive>
+                    <keep-alive >
                         <component :is="Component" />
                     </keep-alive>
                 </router-view>

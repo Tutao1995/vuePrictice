@@ -21,6 +21,7 @@ let ctx: CanvasRenderingContext2D | null = null;
 let canvas: HTMLCanvasElement | null = null;
 let ballList: Ball[] = [];
 let text = setDate();
+let timer: any
 
 
 function setDate() {
@@ -92,11 +93,19 @@ function draw() {
             item.draw()
         })
         updateText()
-        requestAnimationFrame(draw)
+        timer = requestAnimationFrame(draw)
     }
 }
 
-
+onActivated(() => {
+    canvas = <HTMLCanvasElement>document.querySelector('#canvas');
+    canvas.width = document.body.clientWidth
+    canvas.height = document.body.clientHeight
+    ctx = canvas.getContext('2d', { willReadFrequently: true })
+    if (ctx) {
+        draw()
+    }
+})
 onMounted(() => {
     canvas = <HTMLCanvasElement>document.querySelector('#canvas');
     canvas.width = document.body.clientWidth
@@ -106,17 +115,27 @@ onMounted(() => {
         draw()
     }
 })
+onUnmounted(() => {
+    console.log('unmounted', timer)
+    if (timer) {
+        cancelAnimationFrame(timer)
+    }
+})
+
+onDeactivated(() => {
+    console.log('onDeactivated', timer)
+    if (timer) {
+        cancelAnimationFrame(timer);
+        ballList.forEach(item => {
+            item.clear()
+        })
+    }
+})
 
 
 </script>
 
 <style lang="scss" scoped>
-// @font-face {
-//     font-family: 'DS-Digital';
-//     src:
-//         url('@/assets/iconfont/DS-DIGI-1.ttf') url('@/assets/iconfont/DS-DIGIB-2.ttf') url('@/assets/iconfont/DS-DIGII-3.ttf') url('@/assets/iconfont/DS-DIGIT-4.ttf')
-// }
-
 .home-wrapper {
     background: #eee;
 

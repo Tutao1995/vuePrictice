@@ -7,6 +7,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     CodeEditor: typeof import('./src/components/CodeEditor.vue')['default']
     Dialog: typeof import('./src/components/Dialog.vue')['default']
+    EChartsComponents: typeof import('./src/components/Echarts/EChartsComponents.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElForm: typeof import('element-plus/es')['ElForm']

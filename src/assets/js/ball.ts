@@ -1,3 +1,4 @@
+import { time } from "console"
 
 
 interface ballInfo {
@@ -23,6 +24,7 @@ class Ball {
     private size: number  // 半径
     private canvas: HTMLCanvasElement  // canvas 元素
     private ctx: any
+    private timer: any
     constructor(options: ballInfo) {
         const { canvas } = options
         const r = Math.min(canvas.width - 10, canvas.height - 10) / 2
@@ -58,11 +60,13 @@ class Ball {
             }
             this.x += cutTime * xSpeed
             this.y += cutTime * ySpeed
-            requestAnimationFrame(_move)
+            this.timer = requestAnimationFrame(_move);
         }
         _move()
     }
-    clear() { }
+    clear() {
+        this.timer && cancelAnimationFrame(this.timer)
+    }
 }
 
 export default Ball
