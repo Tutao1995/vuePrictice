@@ -1,16 +1,23 @@
-import { Ref, onMounted, onUnmounted } from "vue"
-export default function useContextMenu(refDom: Ref, left: Ref<number>, top: Ref<number>, isShow: Ref<boolean>, currentRef: Ref, type: 'item1' | 'item2') {
+import { Ref, onMounted, onUnmounted } from 'vue'
+export default function useContextMenu(
+  refDom: Ref,
+  left: Ref<number>,
+  top: Ref<number>,
+  isShow: Ref<boolean>,
+  currentRef: Ref,
+  type: 'item1' | 'item2'
+) {
   const handler = (e: MouseEvent) => {
     isShow.value = false
-    e.stopPropagation();
-    e.preventDefault();
+    e.stopPropagation()
+    e.preventDefault()
     setTimeout(() => {
-      const { clientX, clientY } = e;
+      const { clientX, clientY } = e
       left.value = clientX
       top.value = clientY
-      isShow.value = true;
+      isShow.value = true
       currentRef.value = type
-    }, 50);
+    }, 50)
   }
   const hideHandler = () => {
     isShow.value = false
@@ -19,18 +26,18 @@ export default function useContextMenu(refDom: Ref, left: Ref<number>, top: Ref<
     refDom.value.addEventListener('contextmenu', handler, true)
     document.addEventListener('click', hideHandler)
     document.addEventListener('scroll', hideHandler)
-    let tempParent = refDom.value.parentElement;
+    let tempParent = refDom.value.parentElement
     while (tempParent) {
-      tempParent.addEventListener('scroll', hideHandler);
+      tempParent.addEventListener('scroll', hideHandler)
       tempParent = tempParent.parentElement
     }
   })
   onUnmounted(() => {
     refDom.value.removeEventListener('contextmenu', handler, true)
-    document.removeEventListener('click', hideHandler);
-    let tempParent = refDom.value.parentElement;
+    document.removeEventListener('click', hideHandler)
+    let tempParent = refDom.value.parentElement
     while (tempParent) {
-      tempParent.removeEventListener('scroll', hideHandler);
+      tempParent.removeEventListener('scroll', hideHandler)
       tempParent = tempParent.parentElement
     }
   })

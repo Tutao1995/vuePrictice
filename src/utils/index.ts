@@ -1,4 +1,3 @@
-
 const isString = (val: any) => {
     return Object.prototype.toString.call(val).slice(8, -1) === 'String'
 }
