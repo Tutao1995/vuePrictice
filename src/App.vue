@@ -13,6 +13,7 @@ html {
   width: 100%;
   padding: 0;
   margin: 0;
+  font-family: Inter, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, \5fae\8f6f\96c5\9ed1, Arial, sans-serif;
 }
 #app {
   position: relative;

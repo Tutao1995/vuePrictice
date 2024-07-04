@@ -66,7 +66,7 @@ type Button2Type = 'default' | 'primary' | 'danger'
     条件  Extract
 */
 
-interface Worker {
+interface WorkerInterface {
     name: string,
     age: number,
     salary: number
@@ -78,7 +78,7 @@ interface Student {
     grade: number
 }
 
-type CommonKeys = Extract<keyof Worker, keyof Student>  // name, age
+type CommonKeys = Extract<keyof WorkerInterface, keyof Student>  // name, age
 
 
 /* 

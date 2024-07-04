@@ -27,6 +27,7 @@
         <div class="loader"></div>
     </div>
     {{ testNumber }} {{ testNumberHandler(testNumber) }}
+
 </template>
 
 <script lang="ts" setup>
@@ -35,6 +36,19 @@ import useMouse from '@/hooks/useMouse'
 import { useDraggable } from '@/hooks/useDraggable'
 import Modal from '@/components/Modal.vue'
 import ChatDialog from '@/components/Dialog.vue'
+
+
+const selectOptions = ref([
+    {
+        value: 1,
+        label: 'test1',
+    },
+    {
+        value: 2,
+        label: 'test2',
+    },
+])
+
 /**
  *
  * 自定义弹窗相关
@@ -82,14 +96,12 @@ const { x, y } = useMouse()
 const showRef = ref<HTMLElement>()
 const countRef = ref<HTMLElement>()
 const draggableComputed = computed(() => true)
-useDraggable(countRef, countRef, showRef, draggableComputed);
-
-
+useDraggable(countRef, countRef, showRef, draggableComputed)
 
 /* 
 chatgpt 组件
 */
-const visible = ref<boolean>(false);
+const visible = ref<boolean>(false)
 
 const closeDialogHandler = () => {
     visible.value = false
@@ -98,7 +110,7 @@ const openChatDialogHandler = () => {
     visible.value = true
 }
 
-let testNumber = 12345678;
+let testNumber = 12345678
 
 /* 
     /B   非边界匹配     比如： hello   -》  h,e,l,l,o
@@ -115,7 +127,7 @@ function testNumberHandler(testNumber: number) {
 }
 </script>
 
-<style lang="scss"  scoped>
+<style lang="scss" scoped>
 .box {
     width: 500px;
     height: 500px;
@@ -123,7 +135,7 @@ function testNumberHandler(testNumber: number) {
 }
 
 .text1 {
-    background-image: linear-gradient(#FFCF02, #FF7352);
+    background-image: linear-gradient(#ffcf02, #ff7352);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -137,23 +149,23 @@ function testNumberHandler(testNumber: number) {
 .loader {
     --n: 120px;
     width: var(--n);
-    height: 120px;
-    background: conic-gradient(from 45deg, #2196F3 25%, #F44336 0 50%, #4CAF50 0 75%, #FFC107 0);
+    height: var(--n);
+    background: conic-gradient(from 45deg, #2196f3 25%, #f44336 0 50%, #4caf50 0 75%, #ffc107 0);
     -webkit-mask: radial-gradient(50% 50%, #000 96%, #0000) left/35% 35% no-repeat;
     animation: load 2s infinite;
 }
 
 @keyframes load {
     25% {
-        -webkit-mask-position: top
+        -webkit-mask-position: top;
     }
 
     50% {
-        -webkit-mask-position: right
+        -webkit-mask-position: right;
     }
 
     75% {
-        -webkit-mask-position: bottom
+        -webkit-mask-position: bottom;
     }
 }
 </style>

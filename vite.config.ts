@@ -43,5 +43,18 @@ export default defineConfig({
         drop_debugger: true,
       },
     },
+    target: 'esnext',
+    rollupOptions: {
+        output: {
+          // manualChunks 配置
+          manualChunks: {
+            // 将 React 相关库打包成单独的 chunk 中
+            'vue-vendor': ['vue', 'vue-router', 'pinia'],
+            // 将 Lodash 库的代码单独打包
+            // 将组件库的代码打包
+            'library': ['element-plus'],
+          },
+        },
+      }
   },
 })

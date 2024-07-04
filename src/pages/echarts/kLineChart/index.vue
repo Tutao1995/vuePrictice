@@ -7,6 +7,9 @@
 <script setup lang="ts">
 import EChartsComponents from '@/components/Echarts/EChartsComponents.vue';
 import echarts from '@/components/Echarts/library';
+import {
+    EChartsOption,
+} from 'echarts/types/dist/shared';
 
 let dataX = [
     "XX街道",
@@ -160,7 +163,7 @@ const option = {
             },
         },
     ],
-};
+} as EChartsOption
 
 
 </script>

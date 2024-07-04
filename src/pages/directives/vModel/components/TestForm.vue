@@ -25,7 +25,7 @@ const model = defineProps({
   modelValue: Object as PropType<FormType>
 })
 const emit = defineEmits(['update:modelValue'])
-const obj = useModel(model, 'modelValue', emit);
+const obj:any = useModel(model, 'modelValue', emit);
 
 const start = ref(10);
 const end = ref(1000);
