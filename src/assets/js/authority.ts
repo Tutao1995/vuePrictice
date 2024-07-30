@@ -11,6 +11,11 @@ export default {
             icon: 'PictureFilled'
         },
         {
+            label: '画板',
+            index: '/draw/index',
+            icon: 'PictureFilled'
+        },
+        {
             label: '组件',
             index: '/components/button',
             icon: 'Menu',

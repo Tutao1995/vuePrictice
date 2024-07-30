@@ -12,6 +12,8 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // 引入指令
 import directives from '@/directives/index'
 
+import '@/assets/iconfont/font_7w2lwtd644/iconfont.js'
+
 const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
