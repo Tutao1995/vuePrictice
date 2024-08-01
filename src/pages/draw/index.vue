@@ -21,7 +21,7 @@ const shapeList = [
     {
         title: '矩形',
         iconName: 'icon-juxing',
-        key: 'square'
+        key: 'rect'
     },
     {
         title: '箭头',
@@ -47,12 +47,14 @@ const shapeList = [
 
 const currentShape = ref('circle')
 const setCurrentShapeHandle = (e) => {
-    currentShape.value = e.key
+    currentShape.value = e.key;
+    BoardCanvasInstance.changeShape(e.key)
 }
 
 const canvasWrapper = ref(null)
+let BoardCanvasInstance = null
 onMounted(() => {
-    new BoardCanvas({
+    BoardCanvasInstance = new BoardCanvas({
         container: canvasWrapper.value, 
         type: currentShape.value
     })
