@@ -1,6 +1,9 @@
 <template>
     <div class="draw-wrapper">
         <selection class="shapes-section">
+            <div v-for="item in defaultList" :title="item.title" :key="item.key" :class="['shape-item', item.key === currentShape ? 'shape-active-item' : '']"  @click="setCurrentShapeHandle(item)">
+                <DrawIcon :iconName="item.iconName" />
+            </div>
             <div v-for="item in shapeList" :title="item.title" :key="item.key" :class="['shape-item', item.key === currentShape ? 'shape-active-item' : '']"  @click="setCurrentShapeHandle(item)">
                 <DrawIcon :iconName="item.iconName" />
             </div>
@@ -12,6 +15,13 @@
 <script setup>
 import DrawIcon from './components/DrawIcon.vue'
 import BoardCanvas from './js/board'
+const defaultList = [
+    {
+        title: '拖拽',
+        iconName: 'icon-shoushicaidan',
+        key: 'handle'
+    },
+]
 const shapeList = [
     {
         title: '圆形',
@@ -51,12 +61,17 @@ const setCurrentShapeHandle = (e) => {
     BoardCanvasInstance.changeShape(e.key)
 }
 
+const mouseEventOver = () => {
+    currentShape.value = ''
+}
+
 const canvasWrapper = ref(null)
 let BoardCanvasInstance = null
 onMounted(() => {
     BoardCanvasInstance = new BoardCanvas({
         container: canvasWrapper.value, 
-        type: currentShape.value
+        type: currentShape.value,
+        // mouseEventOver: mouseEventOver
     })
 })
 </script>

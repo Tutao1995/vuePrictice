@@ -1,8 +1,9 @@
 
-type currentType = 'circle' | 'rect' | 'line' | 'pencil' | 'diamond' | 'arrow'
+type currentType = 'circle' | 'rect' | 'line' | 'pencil' | 'diamond' | 'arrow' | 'handle'
 type OptionType = {
     container: HTMLElement
     type: currentType
+    mouseEventOver: Function
 }
 
 export default class Board {
@@ -15,12 +16,14 @@ export default class Board {
     shapes: any[] = [];
     drawing: boolean = false;
     startPoint: Point = new Point(0, 0);
+    mouseEventOver: Function = () => { }
     constructor(option: OptionType) {
-        const { container, type } = option
+        const { container, type, mouseEventOver } = option
         this.container = container;
         this.canvas = this.createCanvas(container);
         this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
         this.currentType = type;
+        this.mouseEventOver = mouseEventOver
         this.pathSegmentHistory = [];
         this.index = 0;
         this.init()
@@ -69,6 +72,9 @@ export default class Board {
     changeShape(shape: currentType) {
         this.currentType = shape
     }
+    isInShape(point: Point) {
+        
+    }
     // 鼠标事件
     mousedownEvent(e: MouseEvent) {
         const that = this
@@ -83,7 +89,8 @@ export default class Board {
             line: Line,
             pencil: Pencil,
             diamond: Diamond,
-            arrow: Arrow
+            arrow: Arrow,
+            handle: Handle
         }
         this.drawing = true
         this.startPoint = new Point(startX, startY)
@@ -97,8 +104,10 @@ export default class Board {
             this.onmouseup = null
             this.onmouseout = null
             that.canvas.style.cursor = 'default'
+            that.mouseEventOver()
         }
     }
+    handle(e: MouseEvent) { }
     circle(e: MouseEvent) {
         const that = this
         const startX = e.offsetX
@@ -154,7 +163,7 @@ export default class Board {
             }
         }
     }
-    diamond(e: MouseEvent) { 
+    diamond(e: MouseEvent) {
         const that = this
         const startX = e.offsetX
         const startY = e.offsetY
@@ -245,9 +254,10 @@ class BaseShape {
     setPoints(points: Point[]) {
         this.points = points
     }
-    draw() {}
+    draw() { }
 }
 
+class Handle { }
 class Arrow extends BaseShape {
     constructor(points: Point[], ctx: CanvasRenderingContext2D) {
         super(points, ctx)
@@ -255,17 +265,33 @@ class Arrow extends BaseShape {
     setEndPoint(point: Point) {
         this.points[1] = point
     }
+    isInside(point: Point) {
+        const [startPoint, endPoint] = this.points;
+        const { x, y } = point;
+        const { x: startX, y: startY } = startPoint;
+        const { x: endX, y: endY } = endPoint;
+        if (x === startX && x === endX) {
+            return true
+        }
+        if (y === startY && y === endY) {
+            return true
+        }
+        // 判断一个点在一条直线上
+        const k = (startY - endY) / (startX - endX) // 斜率
+        const b = startY - k * startX;  // 截距
+        return k * x + b === y
+    }
     draw() {
         const { ctx, points: [startPoint, endPoint] } = this;
-        if(!endPoint) return 
-        let  x1 = startPoint.getX(), y1 = startPoint.getY(), x2 = endPoint.getX(), y2 = endPoint.getY();
-        let  el = 50, al = 15;
+        if (!endPoint) return
+        let x1 = startPoint.getX(), y1 = startPoint.getY(), x2 = endPoint.getX(), y2 = endPoint.getY();
+        let el = 50, al = 15;
         let vertex = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         //计算箭头底边两个点（开始点，结束点，两边角度，箭头角度）
         vertex[0] = x1, vertex[1] = y1, vertex[6] = x2, vertex[7] = y2;
         //计算起点坐标与X轴之间的夹角角度值
-        let  angle = Math.atan2(y2 - y1, x2 - x1) / Math.PI * 180;
-        let  x = x2 - x1, y = y2 - y1, length = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+        let angle = Math.atan2(y2 - y1, x2 - x1) / Math.PI * 180;
+        let x = x2 - x1, y = y2 - y1, length = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
         if (length < 250) {
             el /= 2, al / 2;
         } else if (length < 500) {
@@ -302,6 +328,10 @@ class Pencil extends BaseShape {
     addPoint(point: Point) {
         this.points.push(point)
     }
+    isInside(point: Point) {
+        const { x, y } = point;
+        return this.points.some(p => p.getX() === x && p.getY() === y)
+    }
     draw() {
         const { ctx, points } = this;
         ctx.beginPath();
@@ -323,6 +353,22 @@ class Line extends BaseShape {
     setEndPoint(point: Point) {
         this.points[1] = point
     }
+    isInside(point: Point) {
+        const [startPoint, endPoint] = this.points;
+        const { x, y } = point;
+        const { x: startX, y: startY } = startPoint;
+        const { x: endX, y: endY } = endPoint;
+        if (x === startX && x === endX) {
+            return true
+        }
+        if (y === startY && y === endY) {
+            return true
+        }
+        // 判断一个点在一条直线上
+        const k = (startY - endY) / (startX - endX) // 斜率
+        const b = startY - k * startX;  // 截距
+        return k * x + b === y
+    }
     draw() {
         const { ctx, points: [startPoint, endPoint] } = this;
         if (!endPoint) return
@@ -338,10 +384,26 @@ class Line extends BaseShape {
     }
 }
 
+type ellipsePositionInfo = {
+    centerX: number
+    centerY: number
+    r1: number
+    r2: number
+}
+
 /**椭圆*/
 class Circle extends BaseShape {
+    positionInfo!: ellipsePositionInfo
     constructor(points: Point[], ctx: CanvasRenderingContext2D) {
         super(points, ctx)
+    }
+    isInside(point: Point) {
+        const { centerX, centerY, r1, r2 } = this.positionInfo
+        const { x, y } = point
+        return (Math.pow(x - centerX, 2) / Math.pow(r1, 2)) + (Math.pow(y - centerY, 2) / Math.pow(r2, 2)) <= 1
+    }
+    setPositionInfo(info: ellipsePositionInfo) {
+        this.positionInfo = info
     }
     draw() {
         const { ctx, points: [startPoint, endPoint] } = this;
@@ -357,6 +419,12 @@ class Circle extends BaseShape {
         const pointX = startX + (endX - startX) / 2
         const pointY = startY + (endY - startY) / 2
         ctx.ellipse(pointX, pointY, r1, r2, Math.PI, 0, 2 * Math.PI);
+        this.setPositionInfo({
+            centerX: pointX,
+            centerY: pointY,
+            r1: r1,
+            r2: r2,
+        })
         // ctx.arc(pointX, pointY, r, 0, Math.PI * 2); // 画一个圆心为 (150, 75)，半径为 50 的圆
         ctx.stroke()
         ctx.closePath();
@@ -370,6 +438,12 @@ class Rect extends BaseShape {
     }
     setStart(point: Point) {
         this.points = [point];
+    }
+    isInside(point: Point) {
+        const { x, y } = point
+        const { x: leftTopX, y: leftTopY } = this.points[0]
+        const { x: rightBottomX, y: rightBottomY } = this.points[3]
+        return x >= leftTopX && x <= rightBottomX && y >= leftTopY && y <= rightBottomY
     }
     draw() {
         const { ctx, points } = this;
