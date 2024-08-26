@@ -104,7 +104,7 @@ export default class Board {
             this.onmouseup = null
             this.onmouseout = null
             that.canvas.style.cursor = 'default'
-            that.mouseEventOver()
+            that.mouseEventOver && that.mouseEventOver()
         }
     }
     handle(e: MouseEvent) { }
