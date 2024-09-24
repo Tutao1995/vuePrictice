@@ -3,6 +3,7 @@
         "target": "esnext",
         "useDefineForClassFields": true,
         "allowSyntheticDefaultImports": true,
+        "allowImportingTsExtensions": true,
         "module": "esnext",
         "moduleResolution": "node",
         "strict": true,

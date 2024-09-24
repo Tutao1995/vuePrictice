@@ -6,6 +6,9 @@
 export default {}
 </script>
 <style>
+html {
+  overflow: hidden;
+}
 body,
 html {
   position: relative;

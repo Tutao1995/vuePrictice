@@ -22,12 +22,48 @@
         </template>
     </el-dialog>
     <div>
+      <TtToolTip content="trest" trigger="click">
+        <span>test</span>
+      </TtToolTip>
+        <p class="text1">为你定制 发现精彩</p>
+        <p class="text2">为你定制 发现精彩</p>
+        <p class="text1">为你定制 发现精彩</p>
+        <p class="text2">为你定制 发现精彩</p>
+        <p class="text1">为你定制 发现精彩</p>
+        <p class="text2">为你定制 发现精彩</p>
+        <p class="text1">为你定制 发现精彩</p>
+        <p class="text2">为你定制 发现精彩</p>
+        <p class="text1">为你定制 发现精彩</p>
+        <p class="text2">为你定制 发现精彩</p>
+        <p class="text1">为你定制 发现精彩</p>
+        <p class="text2">为你定制 发现精彩</p>
+        <p class="text1">为你定制 发现精彩</p>
+        <p class="text2">为你定制 发现精彩</p>
+        <p class="text1">为你定制 发现精彩</p>
+        <p class="text2">为你定制 发现精彩</p>
+        <p class="text1">为你定制 发现精彩</p>
+        <p class="text2">为你定制 发现精彩</p>
+        <p class="text1">为你定制 发现精彩</p>
+        <p class="text2">为你定制 发现精彩</p>
+        <span style="width: 100px;
+    display: inline-block;">
+      
+      <el-select v-model="value"  placeholder="Select" style="width: 240px">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+    />
+  </el-select>
+    </span>
+        <p class="text1">为你定制 发现精彩</p>
+        <p class="text2">为你定制 发现精彩</p>
         <p class="text1">为你定制 发现精彩</p>
         <p class="text2">为你定制 发现精彩</p>
         <div class="loader"></div>
     </div>
     {{ testNumber }} {{ testNumberHandler(testNumber) }}
-
 </template>
 
 <script lang="ts" setup>
@@ -36,7 +72,32 @@ import useMouse from '@/hooks/useMouse'
 import { useDraggable } from '@/hooks/useDraggable'
 import Modal from '@/components/Modal.vue'
 import ChatDialog from '@/components/Dialog.vue'
+import TtToolTip from '@/components/widget/TtToolTip'
 
+
+const value = ref('')
+const options = [
+  {
+    value: 'Option1',
+    label: 'Option1',
+  },
+  {
+    value: 'Option2',
+    label: 'Option2',
+  },
+  {
+    value: 'Option3',
+    label: 'Option3',
+  },
+  {
+    value: 'Option4',
+    label: 'Option4',
+  },
+  {
+    value: 'Option5',
+    label: 'Option5',
+  },
+]
 
 const selectOptions = ref([
     {
