@@ -22,7 +22,18 @@
         </template>
     </el-dialog>
     <div>
-      <TtToolTip content="trest" trigger="click">
+      <TtInput placeholder="请输入" v-model="inputValue" :clearable="true" style="width: 200px;" >
+        <template #suffix>
+          <div>111</div>
+        </template>
+      </TtInput>
+      <TtInput placeholder="请输入" v-model="inputValue" :clearable="true" >
+        <template #suffix>
+          <div>22</div>
+        </template>
+      </TtInput>
+      {{ inputValue }}
+      <TtToolTip content="trestdfdfdffdf" trigger="click">
         <span>test</span>
       </TtToolTip>
         <p class="text1">为你定制 发现精彩</p>
@@ -73,7 +84,10 @@ import { useDraggable } from '@/hooks/useDraggable'
 import Modal from '@/components/Modal.vue'
 import ChatDialog from '@/components/Dialog.vue'
 import TtToolTip from '@/components/widget/TtToolTip'
+import TtInput from '@/components/widget/TtInput'
 
+
+const inputValue = ref<string>('11')
 
 const value = ref('')
 const options = [

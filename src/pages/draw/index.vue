@@ -18,39 +18,39 @@ import BoardCanvas from './js/board'
 const defaultList = [
     {
         title: '拖拽',
-        iconName: 'icon-shoushicaidan',
+        iconName: 'icon-mouse-pointer',
         key: 'handle'
     },
 ]
 const shapeList = [
     {
         title: '圆形',
-        iconName: 'icon-yuanxing',
+        iconName: 'icon-circle',
         key: 'circle'
     },
     {
         title: '矩形',
-        iconName: 'icon-juxing',
+        iconName: 'icon-square',
         key: 'rect'
     },
     {
         title: '箭头',
-        iconName: 'icon-youjiantou',
+        iconName: 'icon-arrow-right',
         key: 'arrow'
     },
     {
         title: '直线',
-        iconName: 'icon-hengxian',
+        iconName: 'icon-minus',
         key: 'line'
     },
     {
         title: '菱形',
-        iconName: 'icon-tubiao',
+        iconName: 'icon-crop',
         key: 'diamond'
     },
     {
         title: '笔',
-        iconName: 'huabi',
+        iconName: 'icon-pen-tool',
         key: 'pencil'
     }
 ]

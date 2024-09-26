@@ -8,7 +8,6 @@ export default defineComponent({
   setup(props, { slots }) {
     const setRef = (el: HTMLElement | null) => {
       if (el) {
-        debugger
         props.setRef(el.nextElementSibling || null)
       } else {
         props.setRef(null)

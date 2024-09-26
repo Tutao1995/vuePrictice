@@ -15,6 +15,7 @@
         <div 
           v-if="showArrow" 
           ref="arrowRef" 
+          :data-side="side"
           :class="n('arrow')" 
           :style="arrowStyle"></div>
       </div>
