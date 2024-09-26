@@ -33,6 +33,15 @@
         </template>
       </TtInput>
       <TtSelect placeholder="请输入" v-model="inputValue" :options="selectOptions" ></TtSelect>
+
+      <TtButton text="test" />
+      <TtButton text="test" type="primary" />
+      <TtButton text="test" type="success" />
+      <TtButton text="test" type="warning" />
+      <TtButton text="test" type="danger" />
+      <TtButton text="test" type="info" />
+      <TtButton text="x" type="info" shape="circle" />
+      <TtButton text="x" :disabled="true" />
       {{ inputValue }}
       <TtToolTip content="trestdfdfdffdf" trigger="click">
         <span>test</span>
@@ -87,6 +96,7 @@ import ChatDialog from '@/components/Dialog.vue'
 import TtToolTip from '@/components/widget/TtToolTip'
 import TtInput from '@/components/widget/TtInput'
 import TtSelect from '@/components/widget/TtSelect'
+import TtButton from '@/components/widget/TtButton'
 
 
 const inputValue = ref<string>('11')
