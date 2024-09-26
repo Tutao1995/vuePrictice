@@ -33,4 +33,9 @@ html {
   overflow: hidden;
 }
 
+::-webkit-scrollbar-track-piece{width:8px;background-color:#f5f5f5;border-radius:6px;}
+::-webkit-scrollbar{width:8px;height:8px;}
+::-webkit-scrollbar-thumb{height:50px;background:#bec7d5;border-radius:6px;}
+::-webkit-scrollbar-thumb:hover{background:#91a0b5;}
+
 </style>

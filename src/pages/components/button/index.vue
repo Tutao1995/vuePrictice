@@ -32,6 +32,7 @@
           <div>22</div>
         </template>
       </TtInput>
+      <TtSelect placeholder="请输入" v-model="inputValue" :options="selectOptions" ></TtSelect>
       {{ inputValue }}
       <TtToolTip content="trestdfdfdffdf" trigger="click">
         <span>test</span>
@@ -85,6 +86,7 @@ import Modal from '@/components/Modal.vue'
 import ChatDialog from '@/components/Dialog.vue'
 import TtToolTip from '@/components/widget/TtToolTip'
 import TtInput from '@/components/widget/TtInput'
+import TtSelect from '@/components/widget/TtSelect'
 
 
 const inputValue = ref<string>('11')
@@ -120,7 +122,20 @@ const selectOptions = ref([
     },
     {
         value: 2,
+        label: 'test1',
+    },
+    {
+        value: 3,
+        label: 'testddddddddddddddddddddddddddddddddddddddddddddddd1',
+    },
+    {
+        value: 4,
+        label: 'test1',
+    },
+    {
+        value: 2,
         label: 'test2',
+        disabled: true,
     },
 ])
 

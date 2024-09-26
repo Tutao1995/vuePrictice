@@ -12,6 +12,10 @@ export const TooltipProps = {
   disabled: {
     type: Boolean,
   },
+  showArrow: {
+    type: Boolean,
+    default: true
+  },
   rawContent: Boolean,
   transitionName: {
     type: String,

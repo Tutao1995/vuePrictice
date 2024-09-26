@@ -34,6 +34,23 @@ export const useFloating = ({ middleware, placement, strategy }: UseFloatingProp
     watchEffect(() => {
       update()
     })
+    if(referenceRef.value) {
+      let dom = referenceRef.value
+      while(dom) {
+        dom = dom.parentNode as HTMLElement
+        dom && dom.addEventListener('scroll', update)
+      }
+    }
+  })
+
+  onUnmounted(() => {
+    if(referenceRef.value) {
+      let dom = referenceRef.value
+      while(dom) {
+        dom = dom.parentNode as HTMLElement
+        dom && dom.removeEventListener('scroll', update)
+      }
+    }
   })
 
   return {

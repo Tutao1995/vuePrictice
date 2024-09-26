@@ -8,6 +8,7 @@
       v-model="value"
       :class="n('inner')" 
       :disabled="props.disabled" 
+      :readonly="props.readonly"
       :placeholder="props.placeholder"
       @focus="onfocus"
       @blur="onblur"

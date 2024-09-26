@@ -22,6 +22,10 @@ export const InputProps = {
     type: String,
     default: '',
   },
+  readonly: {
+    type: Boolean,
+    default: false,
+  },
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'

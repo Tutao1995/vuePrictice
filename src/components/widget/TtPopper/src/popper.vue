@@ -145,7 +145,6 @@ $sides: (
 );
 $N: 'tt-popper';
 .#{$N} {
-  --van-arrow-size: 10px;
   --tt-popper-content-bg: #fff;
   --tt-popper-border: 1px solid #ebedf0;
   border-radius: 4px;
@@ -162,6 +161,7 @@ $N: 'tt-popper';
   
   &__arrow {
     position: absolute;
+    z-index: -1;
     width: 10px;
     height: 10px;
     background: var(--tt-popper-content-bg);
@@ -197,6 +197,9 @@ $N: 'tt-popper';
     .#{$N}__arrow {
       border-color: transparent;
     }
+  }
+  &.is-pure {
+    padding: 0;
   }
 }
 
