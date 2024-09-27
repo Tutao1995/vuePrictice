@@ -3,7 +3,7 @@
     <slot></slot>
   </Trigger>
   <Teleport :to="`#${selector}`">
-    <Transition>
+    <Transition :name="props.transitionName">
       <div 
         v-if="show && !props.disabled"
         ref="contentRef"
@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { provide, onMounted, ref, unref, computed, watch, Teleport } from 'vue'
+import { provide, onMounted, ref, unref, computed, watch, Teleport, defineEmits } from 'vue'
 import Trigger from './trigger.vue'
 import { PopperProps, PopperContextKey } from './popper.ts'
 import { createNamespace } from '../../utils/index'
@@ -38,6 +38,8 @@ defineOptions({
 })
 
 const props = defineProps(PopperProps)
+const emit = defineEmits(['open', 'close'])
+
 
 // 统一类名
 const { n } = createNamespace('popper')
@@ -104,12 +106,15 @@ onMounted(() => {
   )
 })
 
+
 const onOpen = () => {
-  show.value = true
+  show.value = true;
+  emit('open')
 }
 
 const onClose = () => {
-  show.value = false
+  show.value = false;
+  emit('close')
 }
 
 watch(
@@ -206,5 +211,22 @@ $N: 'tt-popper';
 .tt-popper-fade-enter-from,
 .tt-popper-fade-leave-to {
   opacity: 0;
+}
+
+.tt-select-menu-enter-active,
+.tt-select-menu-leave-active {
+  transition: transform .3s;
+  opacity: 1;
+  transform: scaleY(1);
+  transform-origin: center top;
+  &[data-side^='top'] {
+    transform-origin: center bottom;
+  }
+}
+
+.tt-select-menu-enter-from,
+.tt-select-menu-leave-to {
+  opacity: 0;
+  transform: scaleY(0);
 }
 </style>

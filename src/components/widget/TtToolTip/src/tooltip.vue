@@ -1,5 +1,5 @@
 <template>
-  <tt-popper v-bind="popperProps" :nowrap="nowrap" ref="popperRef">
+  <tt-popper v-bind="popperProps" :nowrap="nowrap" ref="popperRef" @open="onOpen" @close="onClose">
     <slot></slot>
     <template #content>
       <slot name="content">
@@ -10,13 +10,16 @@
 </template>
 
 <script setup lang="ts">
-import { useAttrs, ref, computed } from 'vue'
+import { useAttrs, ref, computed, defineEmits } from 'vue'
 import TtPopper, { PopperProps } from '../../TtPopper';
 import { TooltipProps } from './tooltip';
 import { useNowrap } from '../../TtPopper/src/hooks/use-nowrap' 
 defineOptions({
   name: 'TtToolTip'
 })
+
+const emit = defineEmits(['open', 'close'])
+
 const props = defineProps(TooltipProps)
 const attrs = useAttrs()
 const popperRef = ref()
@@ -42,8 +45,16 @@ const open = () => {
   popperRef.value.onOpen()
 }
 
+const onOpen = () => {
+  emit('open')
+}
+
+const onClose = () => {
+  emit('close')
+}
+
 const close = () => {
-  popperRef.value.onClose()
+  popperRef.value.onClose();
 }
 
 defineExpose({

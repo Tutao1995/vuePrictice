@@ -1,4 +1,4 @@
-import { PropType } from 'vue'
+import { PropType, InjectionKey } from 'vue'
 export type SelectValueType = string | number | boolean | Object | undefined
 export type Option = {
   label: string | number,
@@ -15,7 +15,6 @@ export const SelectProps = {
   // 下拉框的选项
   options: {
     type: [] as PropType<Option[]>,
-    default: () => []
   },
   // 下拉框的宽度
   width: {
@@ -35,3 +34,9 @@ export const SelectProps = {
     default: 'medium'
   }
 }
+
+type SelectContext = {
+  onSelectToggle: (isOpen: boolean) => void,
+}
+
+export const SelectContextKey: InjectionKey<SelectContext> = Symbol('SelectContextKey')
