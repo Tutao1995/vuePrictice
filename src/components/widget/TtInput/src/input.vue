@@ -116,10 +116,9 @@ $LN: 'tt-input--large';
     justify-content: center;
     width: 14px;
     height: 14px;
-    color: #fff;
+    color: #ccc;
     font-size: 12px;
     border-radius: 50%;
-    background: #ccc;
     cursor: pointer;
   }
   &__suffix {
