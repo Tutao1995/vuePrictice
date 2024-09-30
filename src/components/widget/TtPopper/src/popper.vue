@@ -31,6 +31,7 @@ import { createNamespace } from '../../utils/index'
 import { usePopperContainer } from './hooks/use-popper-container'
 import { useFloating } from './hooks/use-floating'
 import { offset, arrow, shift, flip } from '@floating-ui/vue'
+import { useZIndex } from '../../hooks/use-z-index.ts'
 
 // 组件命名
 defineOptions({
@@ -72,9 +73,12 @@ const { x, y, referenceRef, contentRef, middlewareData, update } = useFloating({
   strategy,
 })
 
+const zIndex = useZIndex().nextZIndex()
+
 const contentStyle = computed(() => {
   return {
-    left: x.value + 'px', top: y.value + 'px' 
+    left: x.value + 'px', top: y.value + 'px',
+    zIndex: zIndex.value
   }
 })
 

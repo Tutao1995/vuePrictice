@@ -1,7 +1,7 @@
 import { PropType, InjectionKey } from 'vue'
 export type SelectValueType = string | number | boolean | Object | undefined
 export type Option = {
-  label: string | number,
+  label: string,
   value: string | number,
   disabled?: Boolean
 }
