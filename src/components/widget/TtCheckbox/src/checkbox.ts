@@ -1,4 +1,4 @@
-import { PropType } from 'vue'
+import { PropType, InjectionKey, ExtractPropTypes } from 'vue'
 
 export const CheckboxProps = {
   label: {
@@ -28,5 +28,39 @@ export const CheckboxProps = {
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
+  },
+  name: {
+    type: String as PropType<string | number>,
+    default: ''
   }
 }
+
+export type Option = {
+  label: string ,
+  value: string | number,
+  disabled?: boolean
+}
+
+type modelValueType = string | number
+
+export const CheckboxGroupProps = {
+  modelValue: {
+    type: Array as PropType<modelValueType[]>,
+    default: () => []
+  },
+  options: {
+    type: Array as PropType<Option[]>,
+    default: () => []
+  },
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large'>,
+    default: 'medium'
+  },
+  group: {
+    type: Boolean,
+    default: true
+  }
+}
+
+export const checkboxGroupContextKey: InjectionKey<ExtractPropTypes<typeof CheckboxGroupProps>> =
+  Symbol('checkboxGroupContextKey')

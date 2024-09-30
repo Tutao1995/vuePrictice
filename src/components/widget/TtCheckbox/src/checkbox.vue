@@ -4,14 +4,14 @@
       <input tab-index="-1" type="checkbox" :disabled="props.disabled" v-model="checkValue" @focus="onfocus" @blur="onblur" :class="n('input')" />
       <tt-icon :class="n('icon')" iconName="icon-check"></tt-icon>
     </span>
-    <span :class="n('label')">{{ props.label }}</span>
+    <span :class="n('label')" :title="props.label">{{ props.label }}</span>
   </label>
 </template>
 
 <script setup lang="ts">
 
-import { ref, defineEmits, computed } from 'vue'
-import { CheckboxProps } from './checkbox';
+import { ref, defineEmits, computed, inject } from 'vue'
+import { CheckboxProps, checkboxGroupContextKey } from './checkbox';
 import { createNamespace } from '../../utils/index'
 import TtIcon from '../../TtIcon';
 
@@ -24,7 +24,10 @@ const { n } = createNamespace('checkbox')
 
 const props = defineProps(CheckboxProps)
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', "change"])
+
+const checkboxGroup = inject(checkboxGroupContextKey)
+
 const indeterminate = ref(false)
 
 const checkboxClass = computed(() => {
@@ -40,6 +43,14 @@ const checkboxClass = computed(() => {
 
 const checkValue = computed({
   get() {
+    if(checkboxGroup?.group) {
+      // @ts-ignore
+      if(checkboxGroup?.modelValue?.value.includes(props.name)) {
+        return true
+      } else {
+        return false
+      }
+    }
     return props.modelValue
   },
   set(val) {
@@ -47,6 +58,7 @@ const checkValue = computed({
       val = true
     }
     emit('update:modelValue', val)
+    emit('change', val)
     indeterminate.value = false
   }
 })
@@ -108,7 +120,7 @@ $IN: 'tt-checkbox--indeterminate';
     }
   }
   &__label {
-    padding: 0 4px;
+    padding: 0 8px;
     color: $text-color;
     cursor: pointer;
   }

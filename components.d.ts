@@ -7,6 +7,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Button: typeof import('./src/components/widget/TtButton/src/button.vue')['default']
     Checkbox: typeof import('./src/components/widget/TtCheckbox/src/checkbox.vue')['default']
+    CheckboxGroup: typeof import('./src/components/widget/TtCheckbox/src/checkboxGroup.vue')['default']
     CodeEditor: typeof import('./src/components/CodeEditor.vue')['default']
     Dialog: typeof import('./src/components/Dialog.vue')['default']
     EChartsComponents: typeof import('./src/components/Echarts/EChartsComponents.vue')['default']
@@ -34,6 +35,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     Select: typeof import('./src/components/widget/TtSelect/src/select.vue')['default']
     SelectContent: typeof import('./src/components/widget/TtSelect/src/SelectContent.vue')['default']
+    SelectGroup: typeof import('./src/components/widget/TtSelect/src/selectGroup.vue')['default']
     SelectItem: typeof import('./src/components/widget/TtSelect/components/SelectItem.vue')['default']
     Src: typeof import('./src/components/widget/TtSelect/src/index.vue')['default']
     Tooltip: typeof import('./src/components/widget/TtToolTip/src/tooltip.vue')['default']

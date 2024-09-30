@@ -35,6 +35,8 @@
       <TtSelect placeholder="请输入" v-model="inputValue" :options="selectOptions" ></TtSelect>
       <TtCheckbox label="111" v-model="checkValue" :indeterminate="true"/>
       <TtCheckbox label="111" v-model="checkValue" :indeterminate="true"/>
+      {{ checkboxGroupValue }}
+      <TtCheckboxGroup v-model="checkboxGroupValue" :options="selectOptions"/>
       <TtButton text="test" />
       <TtButton text="test" type="primary" />
       <TtButton text="test" type="success" />
@@ -99,6 +101,7 @@ import TtInput from '@/components/widget/TtInput'
 import TtSelect from '@/components/widget/TtSelect'
 import TtButton from '@/components/widget/TtButton'
 import TtCheckbox from '@/components/widget/TtCheckbox'
+import { TtCheckboxGroup } from '@/components/widget/TtCheckbox'
 
 
 const inputValue = ref<string>('11')
@@ -152,6 +155,8 @@ const selectOptions = ref([
         disabled: true,
     },
 ])
+
+const checkboxGroupValue = ref([])
 
 /**
  *
