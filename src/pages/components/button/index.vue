@@ -42,7 +42,7 @@
       {{radioValue}}
       <TtRadioGroup v-model="radioValue" :options="selectOptions"/>
       <TtButton text="test" />
-      <TtButton text="test" type="primary" />
+      <TtButton text="tesdfdfdft" @click="ttDialogVisibleHandle" type="primary" />
       <TtButton text="test" type="success" />
       <TtButton text="test" type="warning" />
       <TtButton text="test" type="danger" />
@@ -92,6 +92,17 @@
         <div class="loader"></div>
     </div>
     {{ testNumber }} {{ testNumberHandler(testNumber) }}
+    <TtDialog
+      v-model="ttDialogVisible"
+      :title="'test'"
+      :showClose="true"
+      :showFooter="true"
+      :showHeader="true"
+      :showMask="true"
+      :maskClosable="true"
+      :modalClass="['test']"
+      :modalStyle="{}"
+    ></TtDialog>
 </template>
 
 <script lang="ts" setup>
@@ -108,7 +119,14 @@ import TtCheckbox from '@/components/widget/TtCheckbox'
 import TtRadio from '@/components/widget/TtRadio'
 import { TtCheckboxGroup } from '@/components/widget/TtCheckbox'
 import { TtRadioGroup } from '@/components/widget/TtRadio'
+import TtDialog from '@/components/widget/TtDialog'
 
+
+const ttDialogVisible = ref(false)
+
+const ttDialogVisibleHandle = () => {
+  ttDialogVisible.value = true
+}
 
 const inputValue = ref<string>('11')
 
