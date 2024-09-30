@@ -37,6 +37,10 @@
       <TtCheckbox label="111" v-model="checkValue" :indeterminate="true"/>
       {{ checkboxGroupValue }}
       <TtCheckboxGroup v-model="checkboxGroupValue" :options="selectOptions"/>
+      <TtRadio v-model="checkValue" label="111" :disabled="true"/>
+      <TtRadio v-model="checkValue2" label="222" />
+      {{radioValue}}
+      <TtRadioGroup v-model="radioValue" :options="selectOptions"/>
       <TtButton text="test" />
       <TtButton text="test" type="primary" />
       <TtButton text="test" type="success" />
@@ -101,12 +105,17 @@ import TtInput from '@/components/widget/TtInput'
 import TtSelect from '@/components/widget/TtSelect'
 import TtButton from '@/components/widget/TtButton'
 import TtCheckbox from '@/components/widget/TtCheckbox'
+import TtRadio from '@/components/widget/TtRadio'
 import { TtCheckboxGroup } from '@/components/widget/TtCheckbox'
+import { TtRadioGroup } from '@/components/widget/TtRadio'
 
 
 const inputValue = ref<string>('11')
 
-const checkValue = ref(false)
+const checkValue = ref(true)
+const checkValue2 = ref(false)
+
+const radioValue = ref('')
 
 const value = ref('')
 const options = [

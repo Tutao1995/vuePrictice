@@ -31,6 +31,8 @@ declare module '@vue/runtime-core' {
     LeetCodeTemplate: typeof import('./src/components/LeetCodeTemplate.vue')['default']
     Modal: typeof import('./src/components/Modal.vue')['default']
     Popper: typeof import('./src/components/widget/TtPopper/src/popper.vue')['default']
+    Radio: typeof import('./src/components/widget/TtRadio/src/radio.vue')['default']
+    RadioGroup: typeof import('./src/components/widget/TtRadio/src/radioGroup.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Select: typeof import('./src/components/widget/TtSelect/src/select.vue')['default']

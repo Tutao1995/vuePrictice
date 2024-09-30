@@ -1,11 +1,12 @@
 <template>
-  <div :class="checkboxGroupClass">
-    <tt-checkbox 
+  <div :class="radioGroupClass">
+    <tt-radio 
       v-for="item in props.options"
       :key="item.value"
       :size="props.size"
       :label="item.label"
-      :name="item.value"
+      :name="radioGroupName"
+      :value="item.value"
       :disabled="item.disabled"
       @change="(value: boolean) => onchange(value, item)"
     />
@@ -13,20 +14,20 @@
 </template>
 
 <script setup lang="ts">
-
 import { ref, defineEmits, computed, provide } from 'vue'
-import { CheckboxGroupProps, checkboxGroupContextKey } from './checkbox';
+import { RadioGroupProps, radioGroupContextKey } from './radio';
 import { createNamespace } from '../../utils/index'
-import TtCheckbox from './checkbox.vue'
+import TtRadio from './radio.vue'
 defineOptions({
-  name: 'TtCheckboxGroup',
+  name: 'TtRadioGroup',
 })
 
-const { n } = createNamespace('checkbox-group')
+const { n } = createNamespace('radio-group')
 
-const props = defineProps(CheckboxGroupProps)
+const props = defineProps(RadioGroupProps)
 
 const emit = defineEmits(['update:modelValue', "change"])
+
 
 const modelValue = computed({
   get() {
@@ -38,21 +39,24 @@ const modelValue = computed({
   }
 })
 
-const checkboxGroupClass = computed(() => {
+const radioGroupClass = computed(() => {
   return [
     n(),
   ]
 })
 
+const radioGroupName = computed(() => {
+  return props.name || `tt-radio-group-${Math.random().toString(36).substr(2, 9)}`
+})
+
+
 const onchange = (value: boolean, item: any) => {
   if (value) {
-    modelValue.value = [...modelValue.value, item.value]
-  } else {
-    modelValue.value = modelValue.value.filter((v: any) => v !== item.value)
+    modelValue.value = item.value
   }
 }
 
-provide(checkboxGroupContextKey, {
+provide(radioGroupContextKey, {
   ...props,
   modelValue: modelValue as any
 })
