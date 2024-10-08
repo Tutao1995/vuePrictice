@@ -102,7 +102,17 @@
       :maskClosable="true"
       :modalClass="['test']"
       :modalStyle="{}"
-    ></TtDialog>
+    >
+      <template #header>
+        header
+      </template>
+      <template #content>
+        content
+      </template>
+      <template #footer>
+        footer
+      </template>
+    </TtDialog>
 </template>
 
 <script lang="ts" setup>

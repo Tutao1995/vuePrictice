@@ -47,13 +47,13 @@ export const useZIndex = (zIndexOverrides?: Ref<number>) => {
     return currentZIndex.value
   }
 
-  if (!inject(ZINDEX_INJECTION_KEY)) {
-    console.error(
-      'ZIndexInjection',
-      `Looks like you are using server rendering, you must provide a z-index provider to ensure the hydration process to be succeed
-usage: app.provide(ZINDEX_INJECTION_KEY, { current: 0 })`
-    )
-  }
+//   if (!inject(ZINDEX_INJECTION_KEY)) {
+//     console.error(
+//       'ZIndexInjection',
+//       `Looks like you are using server rendering, you must provide a z-index provider to ensure the hydration process to be succeed
+// usage: app.provide(ZINDEX_INJECTION_KEY, { current: 0 })`
+//     )
+//   }
 
   return {
     initialZIndex,

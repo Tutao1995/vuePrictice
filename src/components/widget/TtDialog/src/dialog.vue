@@ -1,14 +1,14 @@
 <template>
     <Teleport to="body">
         <Transition name="dialog-fade">
-            <div :class="dialogClass" v-if="props.modelValue">
+            <div :class="dialogClass" v-if="props.modelValue" :style="dialogStyle">
                 <div :class="dialogMaskClass" @click="onMaskClick"></div>
-                <div :class="dialogContentClass" :style="dialogBodyStyle">
-                    <div :class="dialogHeaderClass" @drag="onDrag" @dragend="onDragEnd" @dragstart="onDragStart">
-                        <slot name="title"
+                <div :class="dialogContentClass" :style="dialogBodyStyle" ref="ttDialog">
+                    <div :class="dialogHeaderClass" @mousedown="onMouseDown">
+                        <slot name="header"
                             ><span>{{ props.title }}</span></slot
                         >
-                        <TtIcon :class="n('close')" iconName="icon-x" @click="onCancel" />
+                        <TtIcon :class="n('close')" iconName="icon-x" @click.stop="onCancel" />
                     </div>
                     <div :class="dialogBodyClass">
                         <slot name="content"
@@ -39,11 +39,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits, computed, inject } from 'vue'
+import { defineEmits, computed } from 'vue'
 import { DialogProps } from './dialog'
 import { createNamespace } from '../../utils/index'
 import TtIcon from '../../TtIcon'
 import TtButton from '../../TtButton'
+import { useDrag } from './hooks/use-drag'
+import { useZIndex } from '../../hooks/use-z-index.ts'
 
 defineOptions({
     name: 'TtDialog',
@@ -54,6 +56,14 @@ const { n } = createNamespace('dialog')
 const props = defineProps(DialogProps)
 
 const emit = defineEmits(['update:modelValue', 'change'])
+
+const { nextZIndex } = useZIndex()
+
+const dialogStyle = computed(() => {
+    return {
+        zIndex: nextZIndex()
+    } 
+})
 
 const dialogClass = computed(() => {
     return [n()]
@@ -84,12 +94,7 @@ const hasUnit = (value: any) => {
     )
 }
 
-const dialogBodyStyle = computed(() => {
-    return {
-        width: hasUnit(props.width) ? props.width : props.width + 'px',
-        height: hasUnit(props.height) ? props.height : props.height + 'px',
-    }
-})
+
 
 const onOK = () => {
     props.onOK && props.onOK()
@@ -105,19 +110,16 @@ const onMaskClick = () => {
     props.maskClosable && onCancel()
 }
 
+const { translateX, translateY, onMouseDown, ttDialog } = useDrag(props)
 
+const dialogBodyStyle = computed(() => {
+    return {
+        width: hasUnit(props.width) ? props.width : props.width + 'px',
+        height: hasUnit(props.height) ? props.height : props.height + 'px',
+        transform: `translate(calc(-50% + ${translateX.value}px), calc(-50% + ${translateY.value}px))`,
+    }
+})
 
-const onDragStart = (e: any) => {
-   
-}
-
-const onDrag = (e: any) => {
-   
-}
-
-const onDragEnd = () => {
-
-}
 </script>
 
 <style lang="scss" scoped>
@@ -150,7 +152,7 @@ $N: 'tt-dialog';
         flex-shrink: 0;
         border-bottom: 1px solid $border-color;
         .#{$N}__close {
-            cursor: pointer;
+            cursor: pointer !important;
             &:hover {
                 color: $primary-color;
                 font-size: 16px;
