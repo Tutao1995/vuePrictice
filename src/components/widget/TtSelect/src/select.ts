@@ -14,7 +14,8 @@ export const SelectProps = {
   },
   // 下拉框的选项
   options: {
-    type: [] as PropType<Option[]>,
+    type: Array as PropType<Option[]>,
+    default: () => []
   },
   // 下拉框的宽度
   width: {

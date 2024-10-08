@@ -30,7 +30,7 @@ export const CheckboxProps = {
     default: 'medium'
   },
   name: {
-    type: String as PropType<string | number>,
+    type: [String, Number] as PropType<string | number>,
     default: ''
   }
 }

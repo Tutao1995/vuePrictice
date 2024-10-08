@@ -26,7 +26,7 @@ const props = defineProps(CheckboxProps)
 
 const emit = defineEmits(['update:modelValue', "change"])
 
-const checkboxGroup = inject(checkboxGroupContextKey)
+const checkboxGroup = inject(checkboxGroupContextKey, undefined)
 
 const indeterminate = ref(false)
 

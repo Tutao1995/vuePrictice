@@ -34,7 +34,7 @@ const props = defineProps(RadioProps)
 
 const emit = defineEmits(['update:modelValue', 'change'])
 
-const radioGroup = inject(radioGroupContextKey)
+const radioGroup = inject(radioGroupContextKey, undefined)
 
 
 const radioClass = computed(() => {
