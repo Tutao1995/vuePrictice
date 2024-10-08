@@ -59,11 +59,9 @@ const emit = defineEmits(['update:modelValue', 'change'])
 
 const { nextZIndex } = useZIndex()
 
-const dialogStyle = computed(() => {
-    return {
-        zIndex: nextZIndex()
-    } 
-})
+const dialogStyle = {
+  zIndex: nextZIndex()
+}
 
 const dialogClass = computed(() => {
     return [n()]

@@ -107,7 +107,28 @@
         header
       </template>
       <template #content>
-        content
+        <TtButton text="tesdfdfdft" @click="dialogTestHandle" type="primary" />
+        <TtDialog
+          v-model="dialogTest"
+          :title="'test'"
+          :showClose="true"
+          :showFooter="true"
+          :showHeader="true"
+          :showMask="true"
+          :maskClosable="true"
+          :modalClass="['test']"
+          :modalStyle="{}"
+        >
+          <template #header>
+            header
+          </template>
+          <template #content>
+            content
+          </template>
+          <template #footer>
+            footer
+          </template>
+        </TtDialog>
       </template>
       <template #footer>
         footer
@@ -131,6 +152,12 @@ import { TtCheckboxGroup } from '@/components/widget/TtCheckbox'
 import { TtRadioGroup } from '@/components/widget/TtRadio'
 import TtDialog from '@/components/widget/TtDialog'
 
+
+const dialogTest = ref(false)
+
+const dialogTestHandle = () => {
+  dialogTest.value = true
+}
 
 const ttDialogVisible = ref(false)
 
