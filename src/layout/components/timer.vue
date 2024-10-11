@@ -20,7 +20,7 @@ onMounted(() => {
     window.addEventListener('visibilitychange', () => {
         if (document.visibilityState === 'visible') {
             clearInterval(timerId)
-            updateDateTime()
+            timerId = setInterval(updateDateTime, 1000)
         }
     })
 })

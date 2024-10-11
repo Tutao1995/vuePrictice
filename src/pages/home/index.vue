@@ -1,7 +1,5 @@
 <template>
     <div :style="style" class="home-wrapper">
-        widthPixel: {{ widthPixel }} ; heightPixel: {{ heightPixel }}
-
         <canvas id="canvas"></canvas>
     </div>
 </template>
@@ -31,7 +29,8 @@ function setDate() {
 
 function clear() {
     if (ctx && canvas) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        cancelAnimationFrame(timer)
     }
 }
 
@@ -68,7 +67,7 @@ function getPoints() {
     const points = []
     if (ctx && canvas) {
         const { width, height, data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const gaps = 1;
+        const gaps = 2;
         for (let i = 0; i < width; i += gaps) {
             for (let j = 0; j < height; j += gaps) {
                 const index = (i + j * width) * 4;
