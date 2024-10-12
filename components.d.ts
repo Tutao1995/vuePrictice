@@ -6,6 +6,7 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Button: typeof import('./src/components/widget/TtButton/src/button.vue')['default']
+    Calendar: typeof import('./src/components/widget/TtCalendar/src/calendar.vue')['default']
     Checkbox: typeof import('./src/components/widget/TtCheckbox/src/checkbox.vue')['default']
     CheckboxGroup: typeof import('./src/components/widget/TtCheckbox/src/checkboxGroup.vue')['default']
     CodeEditor: typeof import('./src/components/CodeEditor.vue')['default']

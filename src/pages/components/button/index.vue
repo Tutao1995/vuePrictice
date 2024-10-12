@@ -53,26 +53,8 @@
       <TtToolTip content="trestdfdfdffdf" trigger="click">
         <span>test</span>
       </TtToolTip>
+      <TtCalendar />
         <p class="text1">为你定制 发现精彩</p>
-        <p class="text2">为你定制 发现精彩</p>
-        <p class="text1">为你定制 发现精彩</p>
-        <p class="text2">为你定制 发现精彩</p>
-        <p class="text1">为你定制 发现精彩</p>
-        <p class="text2">为你定制 发现精彩</p>
-        <p class="text1">为你定制 发现精彩</p>
-        <p class="text2">为你定制 发现精彩</p>
-        <p class="text1">为你定制 发现精彩</p>
-        <p class="text2">为你定制 发现精彩</p>
-        <p class="text1">为你定制 发现精彩</p>
-        <p class="text2">为你定制 发现精彩</p>
-        <p class="text1">为你定制 发现精彩</p>
-        <p class="text2">为你定制 发现精彩</p>
-        <p class="text1">为你定制 发现精彩</p>
-        <p class="text2">为你定制 发现精彩</p>
-        <p class="text1">为你定制 发现精彩</p>
-        <p class="text2">为你定制 发现精彩</p>
-        <p class="text1">为你定制 发现精彩</p>
-        <p class="text2">为你定制 发现精彩</p>
         <span style="width: 100px;
     display: inline-block;">
       
@@ -85,10 +67,6 @@
     />
   </el-select>
     </span>
-        <p class="text1">为你定制 发现精彩</p>
-        <p class="text2">为你定制 发现精彩</p>
-        <p class="text1">为你定制 发现精彩</p>
-        <p class="text2">为你定制 发现精彩</p>
         <div class="loader"></div>
     </div>
     {{ testNumber }} {{ testNumberHandler(testNumber) }}
@@ -151,6 +129,7 @@ import TtRadio from '@/components/widget/TtRadio'
 import { TtCheckboxGroup } from '@/components/widget/TtCheckbox'
 import { TtRadioGroup } from '@/components/widget/TtRadio'
 import TtDialog from '@/components/widget/TtDialog'
+import TtCalendar from '@/components/widget/TtCalendar'
 
 
 const dialogTest = ref(false)
