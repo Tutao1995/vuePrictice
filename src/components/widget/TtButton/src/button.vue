@@ -69,8 +69,9 @@ $DEN: 'tt-button--default';
 }
 .#{$DEN} {
   &:hover {
-    color: $hover-color;
-    border-color: $hover-color;
+    opacity: 0.3;
+    color: $active-color;
+    border-color: $active-color;
     box-shadow: $box-shadow;
   }
   &:active {

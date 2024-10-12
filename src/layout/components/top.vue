@@ -11,6 +11,7 @@
             <div class="center-text">{{ title }}</div>
         </div>
         <div class="right">
+            <el-button @click="changeTheme">换肤</el-button>
             <timer />
         </div>
     </div>
@@ -42,6 +43,23 @@ const styleComputed = computed(() => {
 const goBack = () => {
     router.push({ name: 'home' })
 }
+
+const changeTheme = () => {
+  document.documentElement.style.setProperty('--theme-color', buildColor());
+}
+
+const buildNumber = () => {
+    return Math.round(Math.random() * 255)
+}
+
+const buildColor = () => {
+    const r = buildNumber();
+    const g = buildNumber();
+    const b = buildNumber();
+    const a = Math.random().toFixed(2)
+    return `rgba(${r}, ${g}, ${b}, ${a})`
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -64,7 +82,7 @@ const goBack = () => {
             width: 38px;
             line-height: 38px;
             text-align: center;
-            background: #db5a6b;
+            background: var(--theme-color);
             color: #fff;
             border-radius: 50%;
         }
@@ -95,7 +113,10 @@ const goBack = () => {
     }
 
     .right {
-        width: 200px;
+        display: flex;
+        align-items: center;
+        min-width: 200px;
+        column-gap: 10px;
     }
 }
 </style>

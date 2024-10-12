@@ -13,7 +13,7 @@ export default {
         {
             label: '画板',
             index: '/draw/index',
-            icon: 'PictureFilled'
+            icon: 'EditPen'
         },
         {
             label: '组件',
@@ -23,17 +23,17 @@ export default {
                 {
                     label: 'button',
                     index: '/components/button',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'table',
                     index: '/components/table',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'virtualList',
                     index: '/components/virtualList',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 }
             ],
         },
@@ -45,22 +45,22 @@ export default {
                 {
                     label: 'columnChart',
                     index: '/echarts/columnChart',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'lineEchart',
                     index: '/echarts/lineEchart',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'pieChart',
                     index: '/echarts/pieChart',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'categoryChart',
                     index: '/echarts/categoryChart',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
             ],
         },
@@ -72,37 +72,37 @@ export default {
                 {
                     label: 'copy',
                     index: '/directives/copy',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'clickOutside',
                     index: '/directives/clickOutside',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'draggable',
                     index: '/directives/draggable',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'debounce',
                     index: '/directives/debounce',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'throttle',
                     index: '/directives/throttle',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'useModel',
                     index: '/directives/useModel',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'contextMenu',
                     index: '/directives/contextMenu',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
             ],
         },
@@ -114,7 +114,7 @@ export default {
                 {
                     label: '队列',
                     index: '/leetCode/queue',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 }
             ],
         },
@@ -126,7 +126,7 @@ export default {
                 {
                     label: 'reactivity',
                     index: '/vueSourceCode/reactivity',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 }
             ],
         },
@@ -145,12 +145,12 @@ export default {
                 {
                     label: 'button',
                     index: '/components/button',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'table',
                     index: '/components/table',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
             ],
         },
@@ -162,17 +162,17 @@ export default {
                 {
                     label: 'columnChart',
                     index: '/echarts/columnChart',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'lineEchart',
                     index: '/echarts/lineEchart',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'pieChart',
                     index: '/echarts/pieChart',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
             ],
         },
@@ -191,12 +191,12 @@ export default {
                 {
                     label: 'button',
                     index: '/components/button',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'table',
                     index: '/components/table',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
             ],
         },
@@ -208,17 +208,17 @@ export default {
                 {
                     label: 'columnChart',
                     index: '/echarts/columnChart',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'lineEchart',
                     index: '/echarts/lineEchart',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
                 {
                     label: 'pieChart',
                     index: '/echarts/pieChart',
-                    icon: 'PriceTag'
+                    icon: 'ArrowRightBold'
                 },
             ],
         },

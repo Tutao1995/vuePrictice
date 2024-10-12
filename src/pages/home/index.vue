@@ -67,7 +67,7 @@ function getPoints() {
     const points = []
     if (ctx && canvas) {
         const { width, height, data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const gaps = 2;
+        const gaps = 3;
         for (let i = 0; i < width; i += gaps) {
             for (let j = 0; j < height; j += gaps) {
                 const index = (i + j * width) * 4;
@@ -86,6 +86,7 @@ function getPoints() {
 }
 
 function draw() {
+   
     if (ctx && canvas) {
         clear()
         ballList.forEach(item => {
@@ -139,7 +140,7 @@ onDeactivated(() => {
     background: #eee;
 
     #canvas {
-        background: radial-gradient(#fff, #8c738c);
+        background: radial-gradient(circle farthest-corner at 100% 50%,#d1d3d6,#fcfcfd);
         display: block;
         width: 1865px;
         height: 969px;

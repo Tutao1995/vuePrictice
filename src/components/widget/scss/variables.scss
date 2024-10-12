@@ -1,8 +1,8 @@
-$theme-color: rgb(219, 90, 107);
+$theme-color: var(--theme-color);
 $border-color: #e6e6e6;
 $primary-color: $theme-color;
 $active-color: $theme-color;
-$hover-color: rgba(219, 90, 107, .3);
+$hover-color: rgba($theme-color, 0.3);
 
 $success-color: #67c23a;
 $warning-color: #e6a23c;

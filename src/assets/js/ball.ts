@@ -38,9 +38,10 @@ class Ball {
         this.ctx = canvas.getContext('2d')
     }
     draw() {
+        const color = document.documentElement.style.getPropertyValue('--theme-color') || '#fb923c'
         const { ctx, x, y, size } = this;
         ctx.beginPath();
-        ctx.fillStyle = '#544554'
+        ctx.fillStyle = color
         ctx.arc(x, y, size, 0, 2 * Math.PI)
         ctx.fill();
     }

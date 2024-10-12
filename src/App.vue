@@ -6,9 +6,18 @@
 export default {}
 </script>
 <style>
+
+:root {
+  --theme-color: #fb923c;
+}
+ 
+
+
 html {
   overflow: hidden;
 }
+
+
 body,
 html {
   position: relative;
@@ -23,7 +32,7 @@ html {
   height: 100%;
   width: 100%;
   text-align: center;
-  color: #2c3e50;
+  color: var(--theme-color);
 }
 .icon {
   width: 1em;

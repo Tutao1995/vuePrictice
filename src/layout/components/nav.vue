@@ -1,7 +1,7 @@
 <template>
     <div v-if="props.nav.length">
         <el-menu class="el-menu-vertical" :default-active="defaultRoute" :collapse="expand"
-            active-text-color="rgb(80, 97, 109)" background-color="#545c64" text-color="#fff" @open="handleOpen"
+            background-color="#545c64" text-color="#fff" @open="handleOpen"
             @close="handleClose" router>
             <template v-for="item of props.nav" :key="item.index">
                 <template v-if="item.children">
@@ -78,6 +78,10 @@ const handleOpen = (key: string, keyPath: string[]) => {
 const handleClose = (key: string, keyPath: string[]) => {
     emits('close', key, keyPath)
 }
+
+const activeColor = computed(() => {
+  return  document.documentElement.style.getPropertyValue('--theme-color');
+})
 </script>
 
 <style scoped lang="scss">
@@ -91,7 +95,7 @@ const handleClose = (key: string, keyPath: string[]) => {
 .el-menu-item.is-active {
     position: relative;
     background: #d6ecf0;
-
+    color: var(--theme-color);
     &::before {
         position: absolute;
         left: 0;

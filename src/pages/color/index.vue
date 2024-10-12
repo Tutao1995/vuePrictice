@@ -7,7 +7,7 @@
                     'circle-item',
                     'circle-item-' + index,
                     +index === active ? 'circle-item-active' : '111',
-                ]" :style="{ background: calculateColor(item) }" :key="index" @click="colorItemClickHandle(index)">
+                ]" :style="{ background: calculateColor(item) }" :key="index" @mouseenter="colorItemClickHandle(index)">
                     {{ item.text }}
                 </div>
                 <el-button @click="randomColor" class="random-button">随机色</el-button>
@@ -74,7 +74,7 @@ $wrapper: wrapper;
         position: relative;
         height: 100%;
         width: 100%;
-
+        transition: background ease 0.5s;
         &-color-text {
             color: #fff;
         }
@@ -98,7 +98,7 @@ $wrapper: wrapper;
                 background: #fff;
                 box-shadow: black 0px 0px 0.8rem;
                 cursor: pointer;
-                transition: all ease 0.2s;
+                transition: top ease 0.5s;
             }
 
             @for $i from 1 through 10 {
