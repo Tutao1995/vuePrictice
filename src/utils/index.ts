@@ -14,15 +14,20 @@ export function addUnit(value?: string | number, defaultUnit = 'px') {
     }
 }
 export function buildDate() {
-    const current = new Date();
-    const year = current.getFullYear();
-    const month = current.getMonth();
-    const day = current.getDate();
-    const hour = current.getHours();
+    const current = new Date()
+    const year = current.getFullYear()
+    const month = current.getMonth()
+    const day = current.getDate()
+    const hour = current.getHours()
     const minutes = current.getMinutes()
     const seconds = current.getSeconds()
     return {
-        year, month, day, hour, minutes, seconds
+        year,
+        month,
+        day,
+        hour,
+        minutes,
+        seconds,
     }
 }
 export function addZero(value: number) {

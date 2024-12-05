@@ -1,3 +1,3 @@
 export default {
-    title: 'categoryChart'
+    title: 'categoryChart',
 }

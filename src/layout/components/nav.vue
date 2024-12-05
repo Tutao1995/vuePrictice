@@ -1,8 +1,15 @@
 <template>
     <div v-if="props.nav.length">
-        <el-menu class="el-menu-vertical" :default-active="defaultRoute" :collapse="expand"
-            background-color="#545c64" text-color="#fff" @open="handleOpen"
-            @close="handleClose" router>
+        <el-menu
+            class="el-menu-vertical"
+            :default-active="defaultRoute"
+            :collapse="expand"
+            background-color="#545c64"
+            text-color="#fff"
+            @open="handleOpen"
+            @close="handleClose"
+            router
+        >
             <template v-for="item of props.nav" :key="item.index">
                 <template v-if="item.children">
                     <el-sub-menu :index="item.index">
@@ -13,7 +20,11 @@
                             <span>{{ item.label }}</span>
                         </template>
                         <template v-if="item.children">
-                            <el-menu-item v-for="cItem of item.children" :index="cItem.index" :key="cItem.index">
+                            <el-menu-item
+                                v-for="cItem of item.children"
+                                :index="cItem.index"
+                                :key="cItem.index"
+                            >
                                 <el-icon>
                                     <component :is="cItem.icon" />
                                 </el-icon>
@@ -23,9 +34,11 @@
                     </el-sub-menu>
                 </template>
                 <template v-else>
-                    <el-menu-item :index="item.index"><el-icon>
-                            <component :is="item.icon" />
-                        </el-icon><span>{{ item.label }}</span></el-menu-item>
+                    <el-menu-item :index="item.index"
+                        ><el-icon>
+                            <component :is="item.icon" /> </el-icon
+                        ><span>{{ item.label }}</span></el-menu-item
+                    >
                 </template>
             </template>
         </el-menu>
@@ -80,7 +93,7 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 
 const activeColor = computed(() => {
-  return  document.documentElement.style.getPropertyValue('--theme-color');
+    return document.documentElement.style.getPropertyValue('--theme-color')
 })
 </script>
 

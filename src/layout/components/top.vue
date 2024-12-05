@@ -5,7 +5,12 @@
             <div class="left-text" :style="styleComputed">Tt Admin</div>
         </div>
         <div class="center">
-            <el-icon class="center-icon" style="cursor: pointer" @click="store.expandToggle()" :size="24">
+            <el-icon
+                class="center-icon"
+                style="cursor: pointer"
+                @click="store.expandToggle()"
+                :size="24"
+            >
                 <component :is="expand ? 'Expand' : 'Fold'" />
             </el-icon>
             <div class="center-text">{{ title }}</div>
@@ -29,15 +34,15 @@ const router = useRouter()
 const styleComputed = computed(() => {
     return expand.value
         ? {
-            width: '0px',
-            opacity: 0,
-            padding: '0',
-        }
+              width: '0px',
+              opacity: 0,
+              padding: '0',
+          }
         : {
-            width: '120px',
-            opacity: 1,
-            padding: '0 10px',
-        }
+              width: '120px',
+              opacity: 1,
+              padding: '0 10px',
+          }
 })
 
 const goBack = () => {
@@ -45,7 +50,7 @@ const goBack = () => {
 }
 
 const changeTheme = () => {
-  document.documentElement.style.setProperty('--theme-color', buildColor());
+    document.documentElement.style.setProperty('--theme-color', buildColor())
 }
 
 const buildNumber = () => {
@@ -53,13 +58,12 @@ const buildNumber = () => {
 }
 
 const buildColor = () => {
-    const r = buildNumber();
-    const g = buildNumber();
-    const b = buildNumber();
+    const r = buildNumber()
+    const g = buildNumber()
+    const b = buildNumber()
     const a = Math.random().toFixed(2)
     return `rgba(${r}, ${g}, ${b}, ${a})`
 }
-
 </script>
 
 <style lang="scss" scoped>

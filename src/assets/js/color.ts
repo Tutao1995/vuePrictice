@@ -1,21 +1,16 @@
-
 export interface listItemType {
-    text: string,
-    bgColor: string,
+    text: string
+    bgColor: string
     pinyin: string
 }
 
-
 export interface colorItemType {
-    text: string,
-    bgColor: string,
+    text: string
+    bgColor: string
     list: listItemType[] | []
 }
 
-
-
 export default [
-
     {
         text: '红',
         bgColor: '#FFB3A7',
@@ -35,47 +30,32 @@ export default [
                 pinyin: 'xuě Bái',
                 bgColor: '#F2FDFF',
             },
-        ]
+        ],
     },
     {
-
         text: '黄',
         bgColor: '#FFF143',
-        list: [
-
-        ]
+        list: [],
     },
     {
-
         text: '绿',
         bgColor: '#BDDD22',
-        list: [
-
-        ]
+        list: [],
     },
     {
-
         text: '蓝',
         bgColor: '#44CEF6',
-        list: [
-
-        ]
+        list: [],
     },
     {
-
         text: '苍',
         bgColor: '#75878A',
-        list: [
-
-        ]
+        list: [],
     },
     {
-
         text: '水',
         bgColor: '#88ADA6',
-        list: [
-
-        ]
+        list: [],
     },
     {
         text: '白',
@@ -99,19 +79,13 @@ export default [
         ],
     },
     {
-
         text: '黑',
         bgColor: '#111',
-        list: [
-
-        ]
+        list: [],
     },
     {
-
         text: '金',
         bgColor: '#F2BE45',
-        list: [
-        ]
+        list: [],
     },
 ]
-

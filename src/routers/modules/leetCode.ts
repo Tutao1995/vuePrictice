@@ -12,12 +12,11 @@ const routes: RouteRecordRaw[] = [
                 path: 'queue',
                 component: () => import('@/pages/leetCode/queue/index.vue'),
                 meta: {
-                    title: 'leetCode/队列'
-                }
+                    title: 'leetCode/队列',
+                },
             },
-        ]
+        ],
     },
 ]
-
 
 export default routes

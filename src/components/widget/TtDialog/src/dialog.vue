@@ -45,7 +45,7 @@ import { createNamespace } from '../../utils/index'
 import TtIcon from '../../TtIcon'
 import TtButton from '../../TtButton'
 import { useDrag } from './hooks/use-drag'
-import { useZIndex } from '../../hooks/use-z-index.ts'
+import { useZIndex } from '../../hooks/use-z-index'
 
 defineOptions({
     name: 'TtDialog',
@@ -60,7 +60,7 @@ const emit = defineEmits(['update:modelValue', 'change'])
 const { nextZIndex } = useZIndex()
 
 const dialogStyle = {
-  zIndex: nextZIndex()
+    zIndex: nextZIndex(),
 }
 
 const dialogClass = computed(() => {
@@ -92,8 +92,6 @@ const hasUnit = (value: any) => {
     )
 }
 
-
-
 const onOK = () => {
     props.onOK && props.onOK()
     emit('update:modelValue', false)
@@ -117,7 +115,6 @@ const dialogBodyStyle = computed(() => {
         transform: `translate(calc(-50% + ${translateX.value}px), calc(-50% + ${translateY.value}px))`,
     }
 })
-
 </script>
 
 <style lang="scss" scoped>

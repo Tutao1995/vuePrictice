@@ -147,12 +147,15 @@ module.exports = {
         'prefer-const': 'warn',
         'prefer-rest-params': 'warn',
         'no-useless-escape': 'warn',
-        'no-irregular-whitespace': ["error", {
-          "skipTemplates": true,
-          "skipRegExps": true,
-          "skipHTMLAttributeValues": true,
-          "skipHTMLTextContents": true
-        }],
+        'no-irregular-whitespace': [
+            'error',
+            {
+                skipTemplates: true,
+                skipRegExps: true,
+                skipHTMLAttributeValues: true,
+                skipHTMLTextContents: true,
+            },
+        ],
         'no-prototype-builtins': 'warn',
         'no-fallthrough': 'warn',
         'no-extra-boolean-cast': 'warn',

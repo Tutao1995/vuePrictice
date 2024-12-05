@@ -8,19 +8,18 @@
 import VirtualList from '@/components/VirtualList.vue'
 
 interface dataInfoItem {
-    id: number,
+    id: number
     value: any
 }
 
-const data = ref<dataInfoItem[]>([]);
+const data = ref<dataInfoItem[]>([])
 
 for (let i = 0; i < 1000; i++) {
     data.value.push({
         id: i,
-        value: i
+        value: i,
     })
 }
-
 </script>
 
 <style lang="scss" scoped>

@@ -5,72 +5,68 @@
 </template>
 
 <script setup lang="ts">
-import EChartsComponents from '@/components/Echarts/EChartsComponents.vue';
-import echarts from '@/components/Echarts/library';
-import {
-    EChartsOption,
-} from 'echarts/types/dist/shared';
+import EChartsComponents from '@/components/Echarts/EChartsComponents.vue'
+import echarts from '@/components/Echarts/library'
+import { EChartsOption } from 'echarts/types/dist/shared'
 
 let dataX = [
-    "XX街道",
-    "XX街道",
-    "XX街道",
-    "XX街道",
-    "XX街道",
-    "XX街道",
-    "XX街道",
-    "XX街道",
-    "XX街道",
-    "XX街道",
-    "XX街道",
-    "XX街道",
-    "XX街道",
-    "XX街道",
-    "XX街道",
-    "XX街道",
-    "XX街道",
-    "XX街道",
-]; //名称
-let dataY = [
-    20, 50, 15, 35, 50, 30, 40, 50, 60, 20, 50, 15, 35, 50, 30, 40, 50, 60,
-]; //数据
-let zoomShow = false;
+    'XX街道',
+    'XX街道',
+    'XX街道',
+    'XX街道',
+    'XX街道',
+    'XX街道',
+    'XX街道',
+    'XX街道',
+    'XX街道',
+    'XX街道',
+    'XX街道',
+    'XX街道',
+    'XX街道',
+    'XX街道',
+    'XX街道',
+    'XX街道',
+    'XX街道',
+    'XX街道',
+] //名称
+let dataY = [20, 50, 15, 35, 50, 30, 40, 50, 60, 20, 50, 15, 35, 50, 30, 40, 50, 60] //数据
+let zoomShow = false
 if (dataY.length > 14) {
-    zoomShow = true;
+    zoomShow = true
 } else {
-    zoomShow = false;
+    zoomShow = false
 }
 const option = {
-    backgroundColor: "#0D2753",
+    backgroundColor: '#0D2753',
     tooltip: {
-        trigger: "axis",
+        trigger: 'axis',
         axisPointer: {
-            type: "shadow",
+            type: 'shadow',
         },
     },
     grid: {
-        top: "10%",
-        right: "5%",
-        left: "5%",
-        bottom: "10%",
+        top: '10%',
+        right: '5%',
+        left: '5%',
+        bottom: '10%',
     },
     xAxis: [
         {
-            type: "category",
+            type: 'category',
             data: dataX,
             axisLine: {
                 lineStyle: {
-                    color: "rgba(66, 192, 255, .3)",
+                    color: 'rgba(66, 192, 255, .3)',
                 },
             },
             axisLabel: {
                 interval: 0,
                 margin: 10,
-                color: "#05D5FF",
+                color: '#05D5FF',
                 textStyle: {
                     fontSize: 11,
                 },
-                rotate: "45",
+                rotate: '45',
             },
             axisTick: {
                 //刻度
@@ -82,8 +78,8 @@ const option = {
         {
             axisLabel: {
                 padding: [3, 0, 0, 0],
-                formatter: "{value}",
-                color: "rgba(95, 187, 235, 1)",
+                formatter: '{value}',
+                color: 'rgba(95, 187, 235, 1)',
                 textStyle: {
                     fontSize: 11,
                 },
@@ -93,12 +89,12 @@ const option = {
             },
             axisLine: {
                 lineStyle: {
-                    color: "rgba(66, 192, 255, .3)",
+                    color: 'rgba(66, 192, 255, .3)',
                 },
             },
             splitLine: {
                 lineStyle: {
-                    color: "rgba(255,255,255,0)",
+                    color: 'rgba(255,255,255,0)',
                 },
             },
         },
@@ -107,25 +103,25 @@ const option = {
         //滚动条
         {
             show: zoomShow,
-            type: "slider",
+            type: 'slider',
             realtime: true,
             startValue: 0,
             endValue: 14,
             xAxisIndex: [0],
-            bottom: "10",
-            left: "30",
+            bottom: '10',
+            left: '30',
             height: 10,
-            borderColor: "rgba(0,0,0,0)",
+            borderColor: 'rgba(0,0,0,0)',
             textStyle: {
-                color: "#05D5FF",
+                color: '#05D5FF',
             },
         },
     ],
     series: [
         {
-            type: "line",
+            type: 'line',
             data: dataY,
-            barWidth: "10",
+            barWidth: '10',
             itemStyle: {
                 normal: {
                     color: new echarts.graphic.LinearGradient(
@@ -136,16 +132,16 @@ const option = {
                         [
                             {
                                 offset: 0,
-                                color: "rgba(5, 213, 255, 1)", // 0% 处的颜色
+                                color: 'rgba(5, 213, 255, 1)', // 0% 处的颜色
                             },
                             {
                                 offset: 0.98,
-                                color: "rgba(5, 213, 255, 0)", // 100% 处的颜色
+                                color: 'rgba(5, 213, 255, 0)', // 100% 处的颜色
                             },
                         ],
                         false
                     ),
-                    shadowColor: "rgba(5, 213, 255, 1)",
+                    shadowColor: 'rgba(5, 213, 255, 1)',
                     shadowBlur: 4,
                 },
             },
@@ -153,10 +149,10 @@ const option = {
                 normal: {
                     show: true,
                     lineHeight: 10,
-                    formatter: "{c}",
-                    position: "top",
+                    formatter: '{c}',
+                    position: 'top',
                     textStyle: {
-                        color: "#fff",
+                        color: '#fff',
                         fontSize: 10,
                     },
                 },
@@ -164,8 +160,6 @@ const option = {
         },
     ],
 } as EChartsOption
-
-
 </script>
 
 <style scoped>

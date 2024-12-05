@@ -195,43 +195,43 @@ export const option3 = {
         events: {
             onClick: {
                 enable: true,
-                mode: 'push'
+                mode: 'push',
             },
             onHover: {
                 enable: true,
-                mode: 'grab'
+                mode: 'grab',
             },
-            resize: true
+            resize: true,
         },
         modes: {
             bubble: {
                 distance: 400,
                 duration: 2,
                 opacity: 0.6,
-                size: 10
+                size: 10,
             },
             push: {
-                quantity: 4
+                quantity: 4,
             },
             repulse: {
                 distance: 200,
-                duration: 0.4
-            }
-        }
+                duration: 0.4,
+            },
+        },
     },
     particles: {
         color: {
-            value: '#3CB2BE'
+            value: '#3CB2BE',
         },
         links: {
             color: '#3CB2BE',
             distance: 150,
             enable: true,
             opacity: 0.5,
-            width: 1
+            width: 1,
         },
         collisions: {
-            enable: true
+            enable: true,
         },
         move: {
             direction: 'none',
@@ -239,25 +239,25 @@ export const option3 = {
             outMode: 'bounce',
             random: false,
             speed: 2,
-            straight: false
+            straight: false,
         },
         number: {
             density: {
                 enable: true,
-                value_area: 800
+                value_area: 800,
             },
-            value: 60
+            value: 60,
         },
         opacity: {
-            value: 0.5
+            value: 0.5,
         },
         shape: {
-            type: 'circle'
+            type: 'circle',
         },
         size: {
             random: true,
-            value: 5
-        }
+            value: 5,
+        },
     },
-    detectRetina: true
+    detectRetina: true,
 }

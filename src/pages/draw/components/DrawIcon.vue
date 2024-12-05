@@ -8,10 +8,9 @@
 const props = defineProps({
     iconName: {
         type: String,
-        default: ''
-    }
+        default: '',
+    },
 })
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

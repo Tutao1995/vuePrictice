@@ -1,9 +1,9 @@
 <template>
-  <div class="wrapper">
-    <div class="text">复制指令 🍇🍇🍇🍓🍓🍓</div>
-    <el-button v-copy="count">复制元素</el-button>
-    <el-input v-model="count"></el-input>
-  </div>
+    <div class="wrapper">
+        <div class="text">复制指令 🍇🍇🍇🍓🍓🍓</div>
+        <el-button v-copy="count">复制元素</el-button>
+        <el-input v-model="count"></el-input>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -13,8 +13,8 @@ const count = ref(0)
 
 <style lang="scss" scoped>
 .wrapper {
-  position: relative;
-  height: 100%;
-  width: 100%;
+    position: relative;
+    height: 100%;
+    width: 100%;
 }
 </style>

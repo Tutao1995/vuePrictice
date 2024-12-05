@@ -1,10 +1,22 @@
 <template>
     <div class="draw-wrapper">
         <selection class="shapes-section">
-            <div v-for="item in defaultList" :title="item.title" :key="item.key" :class="['shape-item', item.key === currentShape ? 'shape-active-item' : '']"  @click="setCurrentShapeHandle(item)">
+            <div
+                v-for="item in defaultList"
+                :title="item.title"
+                :key="item.key"
+                :class="['shape-item', item.key === currentShape ? 'shape-active-item' : '']"
+                @click="setCurrentShapeHandle(item)"
+            >
                 <DrawIcon :iconName="item.iconName" />
             </div>
-            <div v-for="item in shapeList" :title="item.title" :key="item.key" :class="['shape-item', item.key === currentShape ? 'shape-active-item' : '']"  @click="setCurrentShapeHandle(item)">
+            <div
+                v-for="item in shapeList"
+                :title="item.title"
+                :key="item.key"
+                :class="['shape-item', item.key === currentShape ? 'shape-active-item' : '']"
+                @click="setCurrentShapeHandle(item)"
+            >
                 <DrawIcon :iconName="item.iconName" />
             </div>
         </selection>
@@ -19,45 +31,45 @@ const defaultList = [
     {
         title: '拖拽',
         iconName: 'icon-mouse-pointer',
-        key: 'handle'
+        key: 'handle',
     },
 ]
 const shapeList = [
     {
         title: '圆形',
         iconName: 'icon-circle',
-        key: 'circle'
+        key: 'circle',
     },
     {
         title: '矩形',
         iconName: 'icon-square',
-        key: 'rect'
+        key: 'rect',
     },
     {
         title: '箭头',
         iconName: 'icon-arrow-right',
-        key: 'arrow'
+        key: 'arrow',
     },
     {
         title: '直线',
         iconName: 'icon-minus',
-        key: 'line'
+        key: 'line',
     },
     {
         title: '菱形',
         iconName: 'icon-crop',
-        key: 'diamond'
+        key: 'diamond',
     },
     {
         title: '笔',
         iconName: 'icon-pen-tool',
-        key: 'pencil'
-    }
+        key: 'pencil',
+    },
 ]
 
 const currentShape = ref('circle')
 const setCurrentShapeHandle = (e) => {
-    currentShape.value = e.key;
+    currentShape.value = e.key
     BoardCanvasInstance.changeShape(e.key)
 }
 
@@ -69,7 +81,7 @@ const canvasWrapper = ref(null)
 let BoardCanvasInstance = null
 onMounted(() => {
     BoardCanvasInstance = new BoardCanvas({
-        container: canvasWrapper.value, 
+        container: canvasWrapper.value,
         type: currentShape.value,
         // mouseEventOver: mouseEventOver
     })

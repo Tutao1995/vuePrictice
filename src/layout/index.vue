@@ -11,7 +11,7 @@
             />
             <div class="home-content-box">
                 <router-view v-slot="{ Component }">
-                    <keep-alive >
+                    <keep-alive>
                         <component :is="Component" />
                     </keep-alive>
                 </router-view>
@@ -28,10 +28,17 @@ import authority from '@/assets/js/authority'
 import theNav from './components/nav.vue'
 import theTop from './components/top.vue'
 
+interface Nav {
+    label: String
+    index: String
+    icon: String
+    children?: Nav[]
+}
+
 const mainStore = useMainStore()
 const { expand } = storeToRefs(mainStore)
 const authorityStore = mainStore.authority
-const authorities = authority[authorityStore]
+const authorities = authority[authorityStore] as Nav[]
 
 const navList = reactive(authorities)
 const handleOpen = (key: string, keyPath: string[]) => {

@@ -3,13 +3,11 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, Ref, ref } from "vue";
-import echarts from "./library";
+import { onMounted, Ref, ref } from 'vue'
+import echarts from './library'
 import { useECharts } from './useECharts'
 import { RenderType, ThemeType } from './echarts-types'
-import {
-    EChartsOption,
-} from 'echarts/types/dist/shared';
+import { EChartsOption } from 'echarts/types/dist/shared'
 
 interface Props {
     option: EChartsOption
@@ -26,17 +24,16 @@ const { setOption, getInstance } = useECharts({
     autoUpdateSize: false,
     render: RenderType.SVGRenderer,
     theme: ThemeType.Default,
-    animation: true
+    animation: true,
 })
 
-
 onMounted(() => {
-    setOption(option.value);
+    setOption(option.value)
     const echartsInstance = getInstance()
 })
 </script>
 
-<style  scoped lang="scss">
+<style scoped lang="scss">
 .chart {
     height: 100%;
     width: 100%;

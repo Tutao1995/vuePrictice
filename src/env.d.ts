@@ -6,4 +6,4 @@ declare module '*.vue' {
     const component: DefineComponent<{}, {}, any>
     export default component
 }
-declare module "particles.vue3";
+declare module 'particles.vue3'

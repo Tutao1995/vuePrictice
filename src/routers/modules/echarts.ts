@@ -1,10 +1,10 @@
 import { RouteRecordRaw } from 'vue-router'
 import { subRoutesHandle, Modules } from '@/utils/route'
-import { Worker } from 'cluster';
-import { type } from 'os';
+import { Worker } from 'cluster'
+import { type } from 'os'
 
 const metaModules: Modules = import.meta.glob('../../pages/echarts/**/meta.ts')
-const compModules: Modules = import.meta.glob('../../pages/echarts/**/index.vue');
+const compModules: Modules = import.meta.glob('../../pages/echarts/**/index.vue')
 const subRoutes = await subRoutesHandle(metaModules, compModules, 'echarts')
 const routes: RouteRecordRaw[] = [
     {
@@ -12,21 +12,20 @@ const routes: RouteRecordRaw[] = [
         name: 'echarts',
         redirect: '/echarts/index',
         component: () => import('@/layout/index.vue'),
-        children: subRoutes
+        children: subRoutes,
     },
 ]
 export default routes
 
 interface Button {
-    type: string,
+    type: string
     text: string
 }
 
 interface Link {
-    url: string,
+    url: string
     click: () => void
 }
-
 
 /* 
     交叉类型    &
@@ -38,7 +37,7 @@ const linkButton: Button & Link = {
     url: 'http://www.baidu.com',
     click: () => {
         console.log('test')
-    }
+    },
 }
 
 /* 
@@ -50,9 +49,8 @@ interface Button1 {
 }
 
 const btn1: Button1 = {
-    type: 'default'
+    type: 'default',
 }
-
 
 /* 
     类型别名
@@ -60,26 +58,23 @@ const btn1: Button1 = {
 
 type Button2Type = 'default' | 'primary' | 'danger'
 
-
-
 /* 
     条件  Extract
 */
 
 interface WorkerInterface {
-    name: string,
-    age: number,
+    name: string
+    age: number
     salary: number
 }
 
 interface Student {
-    name: string,
-    age: number,
+    name: string
+    age: number
     grade: number
 }
 
-type CommonKeys = Extract<keyof WorkerInterface, keyof Student>  // name, age
-
+type CommonKeys = Extract<keyof WorkerInterface, keyof Student> // name, age
 
 /* 
     工具泛型   
@@ -103,7 +98,7 @@ interface ButtonProps {
 const buttonProps: Partial<ButtonProps> = {
     disabled: false,
     type: 'button',
-    onClick: () => { },
+    onClick: () => {},
 }
 
 /* 
@@ -115,31 +110,30 @@ const buttonProps: Partial<ButtonProps> = {
 */
 
 type Person = {
-    name: string,
+    name: string
     age: number
 }
 
 type PersonRecord = Record<string, Person>
 
-
 type Person1 = {
     [key: string]: {
-        name: string,
+        name: string
         age: number
     }
 }
 const person2: Person1 = {
     name: {
         name: '1',
-        age: 1
-    }
+        age: 1,
+    },
 }
 
 const person1: PersonRecord = {
     name: {
         name: '1',
-        age: 1
-    }
+        age: 1,
+    },
 }
 
 /* 
@@ -149,8 +143,8 @@ const person1: PersonRecord = {
 */
 
 type PickPerson = {
-    name: string,
-    age: number,
+    name: string
+    age: number
     address: string
 }
 

@@ -12,10 +12,10 @@ const routes: RouteRecordRaw[] = [
                 path: 'reactivity',
                 component: () => import('@/pages/vueSourceCode/reactivity/index.vue'),
                 meta: {
-                    title: 'vueSourceCode/reactivity'
-                }
+                    title: 'vueSourceCode/reactivity',
+                },
             },
-        ]
+        ],
     },
 ]
 

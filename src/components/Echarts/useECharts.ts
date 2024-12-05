@@ -1,17 +1,16 @@
-import { onMounted, onUnmounted, Ref, unref } from "vue";
-import echarts from "./library";
+import { onMounted, onUnmounted, Ref, unref } from 'vue'
+import echarts from './library'
 // import type { EChartsOption } from 'echarts'
 import { SVGRenderer, CanvasRenderer } from 'echarts/renderers'
 import { RenderType, ThemeType } from './echarts-types'
 
 interface EChartsParams {
-    elParams: Ref<HTMLDivElement> | HTMLDivElement,
-    autoUpdateSize: boolean,
-    render: RenderType.SVGRenderer | RenderType.CanvasRenderer,
-    theme: ThemeType.Default | ThemeType.Light,
+    elParams: Ref<HTMLDivElement> | HTMLDivElement
+    autoUpdateSize: boolean
+    render: RenderType.SVGRenderer | RenderType.CanvasRenderer
+    theme: ThemeType.Default | ThemeType.Light
     animation: boolean
 }
-
 
 export function useECharts(params: EChartsParams) {
     const {
@@ -19,9 +18,9 @@ export function useECharts(params: EChartsParams) {
         autoUpdateSize = false,
         render = RenderType.SVGRenderer,
         theme = ThemeType.Default,
-        animation = true
+        animation = true,
     } = params
-    // 渲染模式 
+    // 渲染模式
     echarts.use(render === RenderType.SVGRenderer ? SVGRenderer : CanvasRenderer)
     // echats实例
     let echartsInstance: echarts.ECharts | null = null

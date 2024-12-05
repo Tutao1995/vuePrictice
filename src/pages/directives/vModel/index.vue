@@ -8,11 +8,11 @@
 
 <script setup lang="ts">
 import TestForm from './components/TestForm.vue'
-import { FormType } from './types';
+import { FormType } from './types'
 import { ref } from 'vue'
 const formObj = ref<FormType>({
     input: '',
-    select: 'Option1'
+    select: 'Option1',
 })
 
 const getFormObj = () => {

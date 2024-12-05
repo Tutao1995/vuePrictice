@@ -4,11 +4,11 @@
 
 ### css 书写顺序
 
-- 定位属性（position, top, right, bottom, left, z-index）
-- 盒模型属性（display, float, width, height, margin, padding, border）
-- 文字属性（color, font, text-align, text-decoration, text-shadow）
-- 背景属性（background, background-color, background-image）
-- 其他属性（cursor, opacity, transition, animation）
+-   定位属性（position, top, right, bottom, left, z-index）
+-   盒模型属性（display, float, width, height, margin, padding, border）
+-   文字属性（color, font, text-align, text-decoration, text-shadow）
+-   背景属性（background, background-color, background-image）
+-   其他属性（cursor, opacity, transition, animation）
 
 ### 登录页使用 particles.vue3 无效
 
@@ -30,9 +30,9 @@ npm i @type/node
 
 store 持续化：
 
-- 添加 pinia-plugin-persist 依赖
-- 在 store 中添加 persist 参数
-- pinia.use(piniaPluginPreset);
+-   添加 pinia-plugin-persist 依赖
+-   在 store 中添加 persist 参数
+-   pinia.use(piniaPluginPreset);
 
 ### 菜单页签刷新，页面变化但是页签 active 不对
 
@@ -67,32 +67,32 @@ const store = useMainStore()
 const { expand } = storeToRefs(store)
 //错误用法：
 const styleComputed = computed(() => {
-  return expand
-    ? {
-        width: '0px',
-        opacity: 0,
-        padding: '0',
-      }
-    : {
-        width: '120px',
-        opacity: 1,
-        padding: '0 10px',
-      }
+    return expand
+        ? {
+              width: '0px',
+              opacity: 0,
+              padding: '0',
+          }
+        : {
+              width: '120px',
+              opacity: 1,
+              padding: '0 10px',
+          }
 })
 
 // 正确
 const styleComputed = computed(() => {
-  return expand.value
-    ? {
-        width: '0px',
-        opacity: 0,
-        padding: '0',
-      }
-    : {
-        width: '120px',
-        opacity: 1,
-        padding: '0 10px',
-      }
+    return expand.value
+        ? {
+              width: '0px',
+              opacity: 0,
+              padding: '0',
+          }
+        : {
+              width: '120px',
+              opacity: 1,
+              padding: '0 10px',
+          }
 })
 ```
 
@@ -100,5 +100,5 @@ const styleComputed = computed(() => {
 
 解决方式：
 
-- script 语句中添加 --skipLibCheck
-- 在 tsconfig 配置添加 skipLibCheck: false
+-   script 语句中添加 --skipLibCheck
+-   在 tsconfig 配置添加 skipLibCheck: false

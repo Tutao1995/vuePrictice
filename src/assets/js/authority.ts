@@ -3,17 +3,17 @@ export default {
         {
             label: '首页',
             index: '/home/index',
-            icon: 'HomeFilled'
+            icon: 'HomeFilled',
         },
         {
             label: '颜色',
             index: '/color/index',
-            icon: 'PictureFilled'
+            icon: 'PictureFilled',
         },
         {
             label: '画板',
             index: '/draw/index',
-            icon: 'EditPen'
+            icon: 'EditPen',
         },
         {
             label: '组件',
@@ -23,18 +23,18 @@ export default {
                 {
                     label: 'button',
                     index: '/components/button',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'table',
                     index: '/components/table',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'virtualList',
                     index: '/components/virtualList',
-                    icon: 'ArrowRightBold'
-                }
+                    icon: 'ArrowRightBold',
+                },
             ],
         },
         {
@@ -45,22 +45,22 @@ export default {
                 {
                     label: 'columnChart',
                     index: '/echarts/columnChart',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'lineEchart',
                     index: '/echarts/lineEchart',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'pieChart',
                     index: '/echarts/pieChart',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'categoryChart',
                     index: '/echarts/categoryChart',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
             ],
         },
@@ -72,37 +72,37 @@ export default {
                 {
                     label: 'copy',
                     index: '/directives/copy',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'clickOutside',
                     index: '/directives/clickOutside',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'draggable',
                     index: '/directives/draggable',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'debounce',
                     index: '/directives/debounce',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'throttle',
                     index: '/directives/throttle',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'useModel',
                     index: '/directives/useModel',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'contextMenu',
                     index: '/directives/contextMenu',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
             ],
         },
@@ -114,8 +114,8 @@ export default {
                 {
                     label: '队列',
                     index: '/leetCode/queue',
-                    icon: 'ArrowRightBold'
-                }
+                    icon: 'ArrowRightBold',
+                },
             ],
         },
         {
@@ -126,8 +126,8 @@ export default {
                 {
                     label: 'reactivity',
                     index: '/vueSourceCode/reactivity',
-                    icon: 'ArrowRightBold'
-                }
+                    icon: 'ArrowRightBold',
+                },
             ],
         },
     ],
@@ -135,7 +135,7 @@ export default {
         {
             label: '首页',
             index: '/home/index',
-            icon: 'HomeFilled'
+            icon: 'HomeFilled',
         },
         {
             label: '组件',
@@ -145,12 +145,12 @@ export default {
                 {
                     label: 'button',
                     index: '/components/button',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'table',
                     index: '/components/table',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
             ],
         },
@@ -162,17 +162,17 @@ export default {
                 {
                     label: 'columnChart',
                     index: '/echarts/columnChart',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'lineEchart',
                     index: '/echarts/lineEchart',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'pieChart',
                     index: '/echarts/pieChart',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
             ],
         },
@@ -181,7 +181,7 @@ export default {
         {
             label: '首页',
             index: '/home/index',
-            icon: 'HomeFilled'
+            icon: 'HomeFilled',
         },
         {
             label: '组件',
@@ -191,12 +191,12 @@ export default {
                 {
                     label: 'button',
                     index: '/components/button',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'table',
                     index: '/components/table',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
             ],
         },
@@ -208,21 +208,21 @@ export default {
                 {
                     label: 'columnChart',
                     index: '/echarts/columnChart',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'lineEchart',
                     index: '/echarts/lineEchart',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
                 {
                     label: 'pieChart',
                     index: '/echarts/pieChart',
-                    icon: 'ArrowRightBold'
+                    icon: 'ArrowRightBold',
                 },
             ],
         },
-    ]
+    ],
 }
 
 export type authorityType = 'admin' | 'system' | 'common'

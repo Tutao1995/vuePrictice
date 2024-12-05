@@ -7,10 +7,11 @@
             transitionName="tt-select-menu"
             :pure="true"
             :disabled="props.disabled"
+            :showArrow="false"
             @open="onOpen"
             @close="onClose"
         >
-            <div :class="n('input-wrapper')" :style="inputStyle">
+            <div :class="n('input-wrapper')" :style="inputStyle" ref="inputRef">
                 <tt-input
                     v-model="selectShowValue"
                     :placeholder="props.placeholder"
@@ -24,7 +25,7 @@
                 </tt-input>
             </div>
             <template #content>
-                <div :class="n('options')" :style="optionsStyle">
+                <div :class="[n('options')]" :style="optionsStyle">
                     <div
                         v-for="item in props.options"
                         :key="item.value"
@@ -32,6 +33,7 @@
                             n('option'),
                             item.value === selectValue ? n('option--selected') : '',
                             item.disabled ? n('option--disabled') : '',
+                            n('option--' + props.size),
                         ]"
                         :title="item.label"
                         @click.stop="selectItem(item)"
@@ -67,10 +69,12 @@ const inputStyle = computed(() => {
     }
 })
 
-const optionsStyle = computed(() => {
-    return {
-        width: props.width,
-    }
+const inputRef = ref()
+onMounted(() => {
+    optionsStyle.width = inputRef.value?.offsetWidth + 'px'
+})
+const optionsStyle = reactive({
+    width: '100%',
 })
 
 const emit = defineEmits(['update:modelValue', 'change'])
@@ -101,18 +105,17 @@ const isOpen = ref(false)
 const iconClass = computed(() => {
     return {
         [n('icon-rotate')]: isOpen.value,
-        [n('input-icon')]: true
+        [n('input-icon')]: true,
     }
 })
 
 const onOpen = () => {
-  isOpen.value = true
+    isOpen.value = true
 }
 
 const onClose = () => {
-  isOpen.value = false
+    isOpen.value = false
 }
-
 </script>
 
 <style scoped lang="scss">
@@ -122,11 +125,11 @@ $N: 'tt-select';
 .#{$N} {
     width: 100%;
     &__input-icon {
-      cursor: pointer;
-      transition: all .2s ease;
+        cursor: pointer;
+        transition: all 0.2s ease;
     }
     &__icon-rotate {
-      transform: rotate(180deg);
+        transform: rotate(180deg);
     }
     &__options {
         padding: 0px !important;
@@ -148,7 +151,7 @@ $N: 'tt-select';
         &:hover {
             color: $text-color-white;
             background: $active-color;
-            opacity: 0.3
+            opacity: 0.3;
         }
     }
     &__option--selected {
@@ -160,6 +163,33 @@ $N: 'tt-select';
         color: $text-color-disabled !important;
         background: $bg-disabled-color !important;
         cursor: not-allowed !important;
+    }
+}
+$sizeMap: (
+    (
+        size: 'small',
+        height: $small-height,
+        font-size: $small-font-size,
+    ),
+    (
+        size: 'medium',
+        height: $medium-height,
+        font-size: $medium-font-size,
+    ),
+    (
+        size: 'large',
+        height: $large-height,
+        font-size: $large-font-size,
+    )
+);
+
+@for $i from 1 through length($sizeMap) {
+    // 遍历数组
+    $item: nth($sizeMap, $i);
+    .#{$N}__option--#{map-get($item, size)} {
+        height: #{map-get($item, height)};
+        line-height: #{map-get($item, height)};
+        font-size: #{map-get($item, font-size)};
     }
 }
 </style>

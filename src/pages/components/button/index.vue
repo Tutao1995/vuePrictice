@@ -22,95 +22,83 @@
         </template>
     </el-dialog>
     <div>
-      <TtInput placeholder="请输入" v-model="inputValue" :clearable="true" style="width: 200px;" >
-        <template #suffix>
-          <div>111</div>
-        </template>
-      </TtInput>
-      <TtInput placeholder="请输入" v-model="inputValue" :clearable="true" >
-        <template #suffix>
-          <div>22</div>
-        </template>
-      </TtInput>
-      <TtSelect placeholder="请输入" v-model="inputValue" :options="selectOptions" ></TtSelect>
-      <TtCheckbox label="111" v-model="checkValue" :indeterminate="true"/>
-      <TtCheckbox label="111" v-model="checkValue" :indeterminate="true"/>
-      {{ checkboxGroupValue }}
-      <TtCheckboxGroup v-model="checkboxGroupValue" :options="selectOptions"/>
-      <TtRadio v-model="checkValue" label="111" :disabled="true"/>
-      <TtRadio v-model="checkValue2" label="222" />
-      {{radioValue}}
-      <TtRadioGroup v-model="radioValue" :options="selectOptions"/>
-      <TtButton text="test" />
-      <TtButton text="tesdfdfdft" @click="ttDialogVisibleHandle" type="primary" />
-      <TtButton text="test" type="success" />
-      <TtButton text="test" type="warning" />
-      <TtButton text="test" type="danger" />
-      <TtButton text="test" type="info" />
-      <TtButton text="x" type="info" shape="circle" />
-      <TtButton text="x" :disabled="true" />
-      {{ inputValue }}
-      <TtToolTip content="trestdfdfdffdf" trigger="click">
-        <span>test</span>
-      </TtToolTip>
-      <TtCalendar />
+        <TtInput placeholder="请输入" v-model="inputValue" :clearable="true" style="width: 200px">
+            <template #suffix>
+                <div>111</div>
+            </template>
+        </TtInput>
+        <TtInput placeholder="请输入" v-model="inputValue" :clearable="true">
+            <template #suffix>
+                <div>22</div>
+            </template>
+        </TtInput>
+        <TtSelect placeholder="请输入" v-model="inputValue" :options="selectOptions"></TtSelect>
+        <TtCheckbox label="111" v-model="checkValue" :indeterminate="true" />
+        <TtCheckbox label="111" v-model="checkValue" :indeterminate="true" />
+        {{ checkboxGroupValue }}
+        <!-- <TtCheckboxGroup v-model="checkboxGroupValue" :options="selectOptions" /> -->
+        <TtRadio v-model="checkValue" label="111" :disabled="true" />
+        <TtRadio v-model="checkValue2" label="222" />
+        {{ radioValue }}
+        <!-- <TtRadioGroup v-model="radioValue" :options="selectOptions" /> -->
+        <TtButton text="test" />
+        <TtButton text="tesdfdfdft" @click="ttDialogVisibleHandle" type="primary" />
+        <TtButton text="test" type="success" />
+        <TtButton text="test" type="warning" />
+        <TtButton text="test" type="danger" />
+        <TtButton text="test" type="info" />
+        <TtButton text="x" type="info" shape="circle" />
+        <TtButton text="x" :disabled="true" />
+        {{ inputValue }}
+        <TtToolTip content="trestdfdfdffdf" trigger="click">
+            <span>test</span>
+        </TtToolTip>
+        <TtCalendar />
         <p class="text1">为你定制 发现精彩</p>
-        <span style="width: 100px;
-    display: inline-block;">
-      
-      <el-select v-model="value"  placeholder="Select" style="width: 240px">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value"
-    />
-  </el-select>
-    </span>
+        <span style="width: 100px; display: inline-block">
+            <el-select v-model="value" placeholder="Select" style="width: 240px">
+                <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                />
+            </el-select>
+        </span>
         <div class="loader"></div>
     </div>
     {{ testNumber }} {{ testNumberHandler(testNumber) }}
     <TtDialog
-      v-model="ttDialogVisible"
-      :title="'test'"
-      :showClose="true"
-      :showFooter="true"
-      :showHeader="true"
-      :showMask="true"
-      :maskClosable="true"
-      :modalClass="['test']"
-      :modalStyle="{}"
+        v-model="ttDialogVisible"
+        :title="'test'"
+        :showClose="true"
+        :showFooter="true"
+        :showHeader="true"
+        :showMask="true"
+        :maskClosable="true"
+        :modalClass="['test']"
+        :modalStyle="{}"
     >
-      <template #header>
-        header
-      </template>
-      <template #content>
-        <TtButton text="tesdfdfdft" @click="dialogTestHandle" type="primary" />
-        <TtDialog
-          v-model="dialogTest"
-          :title="'test'"
-          :showClose="true"
-          :showFooter="true"
-          :showHeader="true"
-          :showMask="true"
-          :maskClosable="true"
-          :modalClass="['test']"
-          :modalStyle="{}"
-        >
-          <template #header>
-            header
-          </template>
-          <template #content>
-            content
-          </template>
-          <template #footer>
-            footer
-          </template>
-        </TtDialog>
-      </template>
-      <template #footer>
-        footer
-      </template>
+        <template #header> header </template>
+        <template #content>
+            <TtButton text="tesdfdfdft" @click="dialogTestHandle" type="primary" />
+            <TtDialog
+                v-model="dialogTest"
+                :title="'test'"
+                :showClose="true"
+                :showFooter="true"
+                :showHeader="true"
+                :showMask="true"
+                :maskClosable="true"
+                :modalClass="['test']"
+                :modalStyle="{}"
+            >
+                <template #header> header </template>
+                <template #content> content </template>
+                <template #footer> footer </template>
+            </TtDialog>
+        </template>
+        <template #footer> footer </template>
     </TtDialog>
 </template>
 
@@ -131,17 +119,16 @@ import { TtRadioGroup } from '@/components/widget/TtRadio'
 import TtDialog from '@/components/widget/TtDialog'
 import TtCalendar from '@/components/widget/TtCalendar'
 
-
 const dialogTest = ref(false)
 
-const dialogTestHandle = () => {
-  dialogTest.value = true
+const dialogTestHandle: () => void = () => {
+    dialogTest.value = true
 }
 
 const ttDialogVisible = ref(false)
 
 const ttDialogVisibleHandle = () => {
-  ttDialogVisible.value = true
+    ttDialogVisible.value = true
 }
 
 const inputValue = ref<string>('11')
@@ -152,30 +139,35 @@ const checkValue2 = ref(false)
 const radioValue = ref('')
 
 const value = ref('')
+type Option = {
+    label: string
+    value: string | number
+    disabled?: Boolean
+}
 const options = [
-  {
-    value: 'Option1',
-    label: 'Option1',
-  },
-  {
-    value: 'Option2',
-    label: 'Option2',
-  },
-  {
-    value: 'Option3',
-    label: 'Option3',
-  },
-  {
-    value: 'Option4',
-    label: 'Option4',
-  },
-  {
-    value: 'Option5',
-    label: 'Option5',
-  },
+    {
+        value: 'Option1',
+        label: 'Option1',
+    },
+    {
+        value: 'Option2',
+        label: 'Option2',
+    },
+    {
+        value: 'Option3',
+        label: 'Option3',
+    },
+    {
+        value: 'Option4',
+        label: 'Option4',
+    },
+    {
+        value: 'Option5',
+        label: 'Option5',
+    },
 ]
 
-const selectOptions = ref([
+const selectOptionValue = [
     {
         value: 1,
         label: 'test1',
@@ -197,7 +189,9 @@ const selectOptions = ref([
         label: 'test2',
         disabled: true,
     },
-])
+] as Option[]
+
+const selectOptions = ref(selectOptionValue) 
 
 const checkboxGroupValue = ref([])
 

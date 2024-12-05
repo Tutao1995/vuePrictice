@@ -3,17 +3,23 @@
         <div class="content" :style="contentStyle">
             <p class="content-color-text">{{ contentStyle.background }}</p>
             <div class="circle-box">
-                <div class="circle-item" v-for="(item, index) of colorJson" :class="[
-                    'circle-item',
-                    'circle-item-' + index,
-                    +index === active ? 'circle-item-active' : '111',
-                ]" :style="{ background: calculateColor(item) }" :key="index" @mouseenter="colorItemClickHandle(index)">
+                <div
+                    class="circle-item"
+                    v-for="(item, index) of colorJson"
+                    :class="[
+                        'circle-item',
+                        'circle-item-' + index,
+                        +index === active ? 'circle-item-active' : '111',
+                    ]"
+                    :style="{ background: calculateColor(item) }"
+                    :key="index"
+                    @mouseenter="colorItemClickHandle(index)"
+                >
                     {{ item.text }}
                 </div>
                 <el-button @click="randomColor" class="random-button">随机色</el-button>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -44,15 +50,15 @@ const buildNumber = () => {
 }
 
 const buildColor = () => {
-    const r = buildNumber();
-    const g = buildNumber();
-    const b = buildNumber();
+    const r = buildNumber()
+    const g = buildNumber()
+    const b = buildNumber()
     const a = Math.random().toFixed(2)
     return `rgba(${r}, ${g}, ${b}, ${a})`
 }
 
 const randomColor = () => {
-    const color = buildColor();
+    const color = buildColor()
     contentStyle.background = color
 }
 </script>
