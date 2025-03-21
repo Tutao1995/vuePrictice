@@ -1,3 +1,5 @@
+import { fa } from "element-plus/es/locale"
+
 type currentType = 'circle' | 'rect' | 'line' | 'pencil' | 'diamond' | 'arrow' | 'handle'
 type OptionType = {
   container: HTMLElement
@@ -17,6 +19,7 @@ export default class Board {
   startPoint: Point = new Point(0, 0)
   mouseEventOver: Function = () => { }
   draggingShape: BaseShape | null = null  // 添加新属性跟踪正在拖拽的图形
+  contextMenuShape: BaseShape | null = null  // 添加属性跟踪右键点击的图形
   constructor(option: OptionType) {
     const { container, type, mouseEventOver } = option
     this.container = container
@@ -50,10 +53,12 @@ export default class Board {
     this.draw()
   }
   bindEvent() {
-    this.canvas.addEventListener('contextmenu', (e) => e.preventDefault())
+    this.canvas.addEventListener('contextmenu', this.handleContextMenu.bind(this))
     this.canvas.addEventListener('mousedown', this.mousedownEvent.bind(this))
     this.canvas.addEventListener('mousemove', this.mousemoveEvent.bind(this))
     window.document.addEventListener('keydown', this.keydownEvent.bind(this))
+    // 添加点击事件监听，用于关闭右键菜单
+    window.addEventListener('click', this.handleClick.bind(this))
   }
   // 设置画笔样式
   setContext2DStyle() {
@@ -302,6 +307,92 @@ export default class Board {
       this.draw()
     })
   }
+  // 处理右键菜单
+  handleContextMenu(e: MouseEvent) {
+    e.preventDefault()
+    
+    // 如果不是handle模式，不显示右键菜单
+    // if (this.currentType !== 'handle') return
+
+    const mousePoint = new Point(e.offsetX, e.offsetY)
+    // 移除已存在的菜单
+    this.removeContextMenu()
+    // 查找点击的图形
+    for (let i = this.shapes.length - 1; i >= 0; i--) {
+      const shape = this.shapes[i]
+      if (shape.isInside?.(mousePoint)) {
+        this.contextMenuShape = shape
+        this.showContextMenu(e.clientX, e.clientY)
+        break
+      }
+    }
+  }
+
+  // 显示右键菜单
+  showContextMenu(x: number, y: number) {
+
+
+    const menu = document.createElement('div')
+    menu.id = 'shape-context-menu'
+    menu.style.position = 'fixed'
+    menu.style.left = `${x}px`
+    menu.style.top = `${y}px`
+    menu.style.backgroundColor = 'white'
+    menu.style.border = '1px solid #ccc'
+    menu.style.padding = '5px 0'
+    menu.style.borderRadius = '4px'
+    menu.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)'
+    menu.style.zIndex = '1000'
+
+    const deleteOption = document.createElement('div')
+    deleteOption.textContent = '删除'
+    deleteOption.style.padding = '5px 15px'
+    deleteOption.style.cursor = 'pointer'
+    deleteOption.style.backgroundColor = '#f5f5f5'
+    
+    deleteOption.addEventListener('click', () => {
+      this.deleteShape(this.contextMenuShape)
+      this.removeContextMenu()
+    })
+
+    deleteOption.addEventListener('mouseover', () => {
+      deleteOption.style.backgroundColor = '#f5f5f5'
+    })
+
+    deleteOption.addEventListener('mouseout', () => {
+      deleteOption.style.backgroundColor = 'white'
+    })
+
+    menu.appendChild(deleteOption)
+    document.body.appendChild(menu)
+  }
+
+  // 删除图形
+  deleteShape(shape: BaseShape | null) {
+    debugger
+    if (!shape) return
+    const index = this.shapes.indexOf(shape)
+    if (index > -1) {
+      this.shapes.splice(index, 1)
+    }
+  }
+
+  // 移除右键菜单
+  removeContextMenu() {
+    const existingMenu = document.getElementById('shape-context-menu')
+    if (existingMenu) {
+      existingMenu.remove()
+    }
+    this.contextMenuShape = null
+  }
+
+  // 处理点击事件，关闭右键菜单
+  handleClick(e: MouseEvent) {
+    const menu = document.getElementById('shape-context-menu')
+    if (menu && !menu.contains(e.target as Node)) {
+      this.removeContextMenu()
+    }
+  }
 }
 
 type PointType = { x: number; y: number }
@@ -501,7 +592,6 @@ class Line extends BaseShape {
     this.points[1] = point
   }
   isInside(point: Point) {
-    debugger
     const [startPoint, endPoint] = this.points
     const { x, y } = point
     const { x: startX, y: startY } = startPoint
@@ -549,6 +639,7 @@ class Circle extends BaseShape {
     super(points, ctx)
   }
   isInside(point: Point) {
+    if(!this.positionInfo) return false
     const { centerX, centerY, r1, r2 } = this.positionInfo
     const { x, y } = point
     return (
