@@ -29,12 +29,46 @@
             />
         </div>
     </div>
+    <TtTable 
+        :columns="tableColumn"
+        :data="tableData"
+        height="500px"
+        selectable
+        selectType="checkbox"
+        v-model:selectedKeys="selectedKeys"
+        @selection-change="selectionChangeHandle"
+    />
 </template>
 
+
 <script lang="ts" setup>
+import TtTable from '@/components/widget/TtTable'
+
 import tableApi from '@/api/table/index'
 import { onMounted, reactive, ref } from 'vue'
 
+/* 
+  // 定义表格属性
+  interface Column {
+      label: string
+      prop: string
+      width?: string | number
+      sortable?: boolean
+      slot?: boolean
+  }
+
+  interface TableProps {
+      columns: Column[]
+      data: any[]
+      emptyText?: string
+      rowClassName?: string | Function
+      stripe?: boolean
+      rowHeight?: number      // 行高
+      bufferSize?: number     // 缓冲区大小
+      virtualScroll?: boolean // 是否开启虚拟滚动
+  }
+
+*/
 interface Column {
     id: number
     code: number
@@ -46,31 +80,37 @@ const tableColumn = [
     {
         prop: 'code',
         label: '代码',
-        width: '180',
+        width: '180px',
     },
     {
         prop: 'date',
         label: '日期',
-        width: '180',
+        width: '180px',
     },
     {
         prop: 'name',
         label: '名字',
-        width: '180',
+        width: '1000px',
     },
     {
         prop: 'province',
         label: '地址',
-        width: '180',
+        width: '1000px',
     },
 ]
 let tableData = ref([])
 let curPage = ref<number>(1)
-let pageSize = ref<number>(20)
+let pageSize = ref<number>(5)
 let totalSize = ref<number>(0)
 let wrapper = ref()
 let tableHeight = ref()
 let selectData = ref<Column[]>([])
+
+const selectedKeys = ref<(string | number)[]>([])
+
+const selectionChangeHandle = (keys: (string | number)[]) => {
+    console.log('Selected keys:', keys)
+}
 
 const getTableList = async () => {
     const res = await tableApi.getTableList({

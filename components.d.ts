@@ -37,6 +37,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Select: typeof import('./src/components/widget/TtSelect/src/select.vue')['default']
+    Src: typeof import('./src/components/widget/TtTable/src/index.vue')['default']
     Tooltip: typeof import('./src/components/widget/TtToolTip/src/tooltip.vue')['default']
     Trigger: typeof import('./src/components/widget/TtPopper/src/trigger.vue')['default']
     VirtualList: typeof import('./src/components/VirtualList.vue')['default']
