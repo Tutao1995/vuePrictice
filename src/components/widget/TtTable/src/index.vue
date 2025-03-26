@@ -38,7 +38,8 @@
                 </table>
             </div>
             <div class="tt-table__fixed-body-wrapper" 
-                 :style="fixedBodyStyle">
+                 :style="fixedBodyStyle"
+                 @scroll="handleScroll">
                 <table class="tt-table__inner" :style="{ width: fixedLeftWidth + 'px' }">
                     <colgroup>
                         <col v-if="selectable" style="width: 50px">
@@ -50,7 +51,8 @@
                         <tr v-for="(row, index) in visibleData" 
                             :key="row.id || index"
                             :class="getRowClass(row, startIndex + index)"
-                            :style="{ height: rowHeight + 'px' }">
+                            :style="{ height: rowHeight + 'px' }"
+                            @click="handleRowClick(row, index)">
                             <td v-if="selectable" class="tt-table__selection-cell">
                                 <template v-if="selectType === 'checkbox'">
                                     <TtCheckbox
@@ -78,7 +80,7 @@
         </div>
 
         <!-- 表头容器 -->
-        <div class="tt-table__header-wrapper" :style="headerWrapperStyle">
+        <div class="tt-table__header-wrapper tt-table__header-not-fixed-wrapper" :style="headerWrapperStyle">
             <table class="tt-table__inner" :style="{ width: `${totalWidth}px` }">
                 <colgroup>
                     <col v-if="selectable" style="width: 50px">
@@ -142,8 +144,12 @@
                 <tbody class="tt-table__body">
                     <tr v-for="(row, index) in visibleData" 
                         :key="row.id || index" 
-                        :class="getRowClass(row, startIndex + index)"
-                        :style="{ height: rowHeight + 'px' }">
+                        :class="[
+                            getRowClass(row, startIndex + index),
+                            { 'tt-table__row--selected': isSelected(row) }
+                        ]"
+                        :style="{ height: rowHeight + 'px' }"
+                        @click="(event) => handleRowClick(row, index, event)">
                         <td v-if="selectable" class="tt-table__selection-cell">
                             <template v-if="selectType === 'checkbox'">
                                 <TtCheckbox
@@ -323,48 +329,11 @@ const visibleData = computed(() => {
     return tableData.value.slice(start, end)
 })
 
-// 修改 processedColumns 计算属性
-const processedColumns = computed(() => {
-    // 计算已设置宽度的列的总宽度
-    let totalSetWidth = 0
-    let unsetColumnsCount = 0
-    
-    // 第一次遍历：计算已设置宽度的列的总宽度和未设置宽度的列数
-    props.columns.forEach(col => {
-        if (col.width) {
-            let width = 0
-            if (typeof col.width === 'string') {
-                width = parseInt(col.width.replace(/[^\d]/g, ''))
-            } else {
-                width = col.width
-            }
-            totalSetWidth += width
-        } else {
-            unsetColumnsCount++
-        }
-    })
-    
-    // 计算剩余宽度
-    const containerWidth = tableContainer.value?.clientWidth || 1000
-    const remainingWidth = Math.max(0, containerWidth - totalSetWidth)
-    
-    // 计算每个未设置宽度的列应得的宽度
-    const defaultColumnWidth = Math.max(
-        120, // 修改最小宽度为120px
-        Math.floor(remainingWidth / Math.max(unsetColumnsCount, 1))
-    )
-    
-    // 第二次遍历：处理每一列的宽度
-    return props.columns.map(col => ({
-        ...col,
-        width: col.width || defaultColumnWidth // 直接使用数字而不是字符串
-    }))
-})
 
 // 修改 nonFixedColumns 计算属性
 const nonFixedColumns = computed(() => {
     // 返回非固定列
-    return props.columns.slice(fixColumnIndex.value + 1)
+    return props.columns
 })
 
 // 修改总宽度计算
@@ -388,39 +357,23 @@ const totalWidth = computed(() => {
     return Math.max(width, minWidth)
 })
 
-// 计算可见列
-const visibleColumns = computed(() => {
-    if (!props.virtualScroll || props.columns.length <= 20) {
-        return props.columns
-    }
-
-    const start = Math.max(0, columnStartIndex.value - columnBufferSize)
-    const end = Math.min(
-        props.columns.length,
-        columnStartIndex.value + visibleColumnCount.value + columnBufferSize
-    )
-    return props.columns.slice(start, end)
-})
-
-// 计算表格样式
-const getTableStyle = computed(() => ({}))
 
 // 修改容器样式
 const containerStyle = computed(() => {
-    const style: Record<string, string> = {
-        marginLeft: hasFixedLeft.value ? `${fixedLeftWidth.value}px` : '0'
-    }
+    const style: Record<string, string> = {}
     
     if (props.height) {
         style.height = typeof props.height === 'number' ? `${props.height}px` : props.height
+        style.maxHeight = style.height // 添加最大高度限制
     } else {
         const headerHeight = 48
         const minHeight = 200
         const maxHeight = 600
+        // 根据实际数据计算内容高度
         const contentHeight = props.data.length * props.rowHeight
-        let totalHeight = contentHeight
-        totalHeight = Math.max(minHeight - headerHeight, Math.min(maxHeight - headerHeight, totalHeight))
+        let totalHeight = Math.max(minHeight, Math.min(maxHeight, contentHeight + headerHeight))
         style.height = `${totalHeight}px`
+        style.maxHeight = `${totalHeight}px`
     }
     
     return style
@@ -428,17 +381,19 @@ const containerStyle = computed(() => {
 
 // 修改表头容器样式
 const headerWrapperStyle = computed(() => ({
-    marginLeft: hasFixedLeft.value ? `${fixedLeftWidth.value}px` : '0'
+    // marginLeft: hasFixedLeft.value ? `${fixedLeftWidth.value}px` : '0'
 }))
 
 // 修改固定列容器样式
 const fixedBodyStyle = computed(() => {
     const style: Record<string, string> = {
         top: `${headerHeight.value}px`,
-        bottom: '0' // 确保固定列容器延伸到底部
+        bottom: '0'
     }
     
-    style.height = containerStyle.value.height
+    if (props.height) {
+        style.height = `calc(100% - ${headerHeight.value}px)`
+    }
     
     return style
 })
@@ -528,47 +483,29 @@ const handleScroll = (e: Event) => {
     const target = e.target as HTMLElement
     const { scrollTop, scrollLeft } = target
     
-    // 同步固定列的滚动位置
-    const fixedBodyWrapper = document.querySelector('.tt-table__fixed-body-wrapper') as HTMLElement
-    if (fixedBodyWrapper) {
-        // 只同步垂直滚动
-        fixedBodyWrapper.scrollTop = scrollTop
+    // 判断滚动来源
+    const isFromFixed = target.classList.contains('tt-table__fixed-body-wrapper')
+    const isFromMain = target.classList.contains('tt-table__container')
+    
+    // 同步竖向滚动
+    if (isFromFixed) {
+        // 如果是固定列滚动，同步主表格
+        if (tableContainer.value) {
+            tableContainer.value.scrollTop = scrollTop
+        }
+    } else if (isFromMain) {
+        // 如果是主表格滚动，同步固定列
+        const fixedBodyWrapper = document.querySelector('.tt-table__fixed-body-wrapper') as HTMLElement
+        if (fixedBodyWrapper) {
+            fixedBodyWrapper.scrollTop = scrollTop
+        }
     }
     
     // 更新表头位置
-    const headerWrapper = document.querySelector('.tt-table__header-wrapper table') as HTMLElement
+    const headerWrapper = document.querySelector('.tt-table__header-not-fixed-wrapper table') as HTMLElement
     if (headerWrapper) {
+        console.log('scrollLeft:', scrollLeft)
         headerWrapper.style.transform = `translateX(-${scrollLeft}px)`
-    }
-
-    // 处理横向虚拟滚动
-    if (props.virtualScroll && props.columns.length > 20) {
-        const scrollLeft = target.scrollLeft
-        let accWidth = 0
-        let index = 0
-        
-        for (const column of props.columns) {
-            const width = parseInt(column.width as string) || 100
-            accWidth += width
-            
-            if (accWidth > scrollLeft) break
-            index++
-        }
-        
-        columnStartIndex.value = Math.max(0, index - 1)
-    }
-
-    // 处理纵向虚拟滚动
-    if (props.virtualScroll && tableContainer.value) {
-        const { scrollTop } = target
-        startIndex.value = Math.floor(scrollTop / props.rowHeight)
-        endIndex.value = Math.min(
-            startIndex.value + visibleCount.value,
-            tableData.value.length
-        )
-
-        offsetTop.value = startIndex.value * props.rowHeight
-        offsetBottom.value = (tableData.value.length - endIndex.value) * props.rowHeight
     }
 }
 
@@ -595,7 +532,18 @@ const handleSort = (column: Column) => {
     emit('sort-change', { prop, order })
 }
 
-const handleRowClick = (row: any, index: number) => {
+const handleRowClick = (row: any, index: number, event: MouseEvent) => {
+    // 如果点击的是复选框或单选框所在的单元格，不触发行选中
+    if ((event.target as HTMLElement).closest('.tt-table__selection-cell')) {
+        return
+    }
+    
+    // 只有在可选择模式下才触发选择
+    if (props.selectable) {
+        handleSelect(row)
+    }
+    
+    // 触发行点击事件
     emit('row-click', row, index)
 }
 
@@ -648,8 +596,18 @@ const updateVisibleCount = () => {
     if (!tableContainer.value) return
     
     const containerHeight = tableContainer.value.clientHeight
-    visibleCount.value = Math.ceil(containerHeight / props.rowHeight)
-    endIndex.value = Math.min(visibleCount.value, tableData.value.length)
+    // 计算可见行数时考虑缓冲区
+    visibleCount.value = Math.ceil(containerHeight / props.rowHeight) + (props.bufferSize * 2)
+    
+    // 更新结束索引，确保不超过数据总量
+    endIndex.value = Math.min(
+        startIndex.value + visibleCount.value,
+        tableData.value.length
+    )
+    
+    // 更新偏移量
+    offsetTop.value = startIndex.value * props.rowHeight
+    offsetBottom.value = (tableData.value.length - endIndex.value) * props.rowHeight
 }
 
 // 添加选择相关的状态和方法
@@ -809,7 +767,7 @@ $N: 'tt-table';
 .#{$N} {
     position: relative;
     width: 100%;
-    height: 100%;  // 确保外层容器占满高度
+    // height: 100%;  // 确保外层容器占满高度
     box-sizing: border-box;
     font-family: Microsoft YaHei, Arial, Helvetica, sans-serif;
     background: $bg-color;
@@ -843,12 +801,19 @@ $N: 'tt-table';
             table-layout: fixed;
         }
     }
-    
+    &__fixed-body-wrapper {
+      table {
+          border-spacing: 0;
+          border-collapse: separate;
+          table-layout: fixed;
+      }
+
+    }
     &__container {
         position: relative;
         overflow: auto;
         width: 100%;
-        height: 100%; // 确保容器占满高度
+        flex: 1;
         
         &--fixed-height {
             flex: none;
@@ -860,15 +825,19 @@ $N: 'tt-table';
             table-layout: fixed;
         }
 
-        // 添加滚动条样式
+        // 修改滚动条样式
         &::-webkit-scrollbar {
             width: 8px;
             height: 8px;
+            display: block;
         }
 
         &::-webkit-scrollbar-thumb {
             background: #c0c4cc;
             border-radius: 4px;
+            &:hover {
+                background: #a6a6a6;
+            }
         }
 
         &::-webkit-scrollbar-track {
@@ -896,6 +865,8 @@ $N: 'tt-table';
     }
 
     &__body {
+        width: 100%;
+        
         td {
             position: relative;
             padding: 12px 8px;
@@ -904,6 +875,7 @@ $N: 'tt-table';
             overflow: hidden;
             text-overflow: ellipsis;
             text-align: left;
+            height: v-bind(rowHeight + 'px'); // 确保行高一致
         }
     }
 
@@ -914,6 +886,10 @@ $N: 'tt-table';
         
         &--striped {
             background-color: #fafafa;
+        }
+
+        &--selected {
+            background-color: #ecf5ff !important;
         }
     }
 
@@ -948,25 +924,24 @@ $N: 'tt-table';
         position: absolute;
         left: 0;
         top: 0;
-        height: 100%; // 确保固定列容器高度与表格一致
+        height: calc(100% - 8px);
         z-index: 3;
         background-color: $bg-color;
         border-right: 1px solid $border-color;
         box-shadow: 6px 0 6px -4px rgba(0, 0, 0, 0.15);
-
-        .#{$N}__header-wrapper {
-            overflow: hidden;
-            background-color: #f5f7fa;
-        }
+        pointer-events: none; // 让固定列容器不阻挡事件
     }
     
     &__fixed-body-wrapper {
         position: absolute;
         left: 0;
+        top: 48px; // 表头高度
+        bottom: 0;
         overflow-x: hidden;
-        overflow-y: scroll; // 改为 scroll，允许垂直滚动
+        overflow-y: scroll;
         background-color: $bg-color;
         width: 100%;
+        pointer-events: auto; // 恢复固定列内容的事件
         
         .#{$N}__inner {
             background-color: $bg-color;

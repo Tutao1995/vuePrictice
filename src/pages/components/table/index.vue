@@ -34,7 +34,7 @@
         :data="tableData"
         height="500px"
         selectable
-        selectType="checkbox"
+        selectType="radio"
         v-model:selectedKeys="selectedKeys"
         @selection-change="selectionChangeHandle"
     />
@@ -100,7 +100,7 @@ const tableColumn = [
 ]
 let tableData = ref([])
 let curPage = ref<number>(1)
-let pageSize = ref<number>(5)
+let pageSize = ref<number>(100)
 let totalSize = ref<number>(0)
 let wrapper = ref()
 let tableHeight = ref()

@@ -130,6 +130,11 @@ export default {
                 },
             ],
         },
+        {
+            label: '文本渲染',
+            index: '/canvasTextRenderer/index',
+            icon: 'List',
+        },
     ],
     system: [
         {
