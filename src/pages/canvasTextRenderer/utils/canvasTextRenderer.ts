@@ -90,6 +90,9 @@ export default class CanvasTextRenderer {
     const currentPage = this.pages[currentPageIndex.value];
 
     if (!ctx || !currentPage) {
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      ctx.fillStyle = backgroundColor;
+      ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       return;
     }
 

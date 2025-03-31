@@ -8,7 +8,6 @@
         style="width: 300px; height: 120px;"
         placeholder="请输入你需要渲染的内容"
       />
-      {{ currentPage }}
       <div>
         <div ref="canvasRef"></div>
         <button type="button" @click="onRender">
@@ -25,6 +24,9 @@
         </button>
         <button type="button" @click="nextPage">
           下一页
+        </button>
+        <button type="button" @click="clear">
+          清空
         </button>
       </div>
       <br />
@@ -54,11 +56,6 @@ onMounted(() => {
   })
 })
 
-const currentPage = computed(() => {
-  console.log(renderer?.currentPageIndex, "value--->>>")
-  return renderer?.currentPageIndex.value  ? renderer?.currentPageIndex.value + 1 : 1
-})
-
 const onRender = () => {
   renderer.render(text.value)
 }
@@ -79,6 +76,11 @@ const nextPage = () => {
 
 }
 
+const clear = () => {
+  text.value = '';
+  onRender()
+}
+
 
 </script>
 
@@ -86,6 +88,34 @@ const nextPage = () => {
 $wrapper: wrapper;
 
 .#{$wrapper} {
-  padding: 20px
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: #a4b2c1;
+  box-sizing: border-box;
+  background: linear-gradient(45deg, #384663 5%,  #07090f 70%, #377e7a);
+  textarea {
+    border: none;
+    outline: none; 
+  }
+  button {
+    margin: 10px 10px 0 0;
+    border: none;
+    outline: none;
+    min-width: 6rem;
+    height: 2.5rem;
+    padding: 0 1rem;
+    color: #a4b2c1;
+    font-weight: 700;
+    background: hsl(216, 14%, 19%);
+    border-radius: .6rem;
+    cursor: pointer;
+    transition: color .2s;
+    user-select: none;
+    &:hover {
+      background: hsl(216, 14%, 24%);
+    }
+  }
 }
 </style>
